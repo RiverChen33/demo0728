@@ -3,7 +3,7 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View,ScrollView,Image,RefreshControl
+    View,ScrollView,Image,RefreshControl,Button
 } from 'react-native';
 
 export default class Demo1 extends Component {
@@ -25,7 +25,7 @@ export default class Demo1 extends Component {
             rows=<View><Image source={require('../../image/empty.png')} style={{width:40,height:40,marginTop:50,alignSelf:'center'}}/>
                 <Text style={{fontSize:12,textAlign:'center',color:'#929292',paddingTop:10}}>没有更多数据了</Text></View>;
         }
-        
+
         return (
             <ScrollView refreshControl={  //设置下拉刷新组件
                 <RefreshControl
