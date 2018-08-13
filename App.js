@@ -20,6 +20,7 @@ import {
 import Demo1 from "./src/Demo1";
 import Demo2 from "./src/Demo2";
 import LoginView from "./src/loginView";
+import ForgetPwd from "./src/forgetPwd";
 import Mine from "./src/Mine";
 import Home from "./src/Home";
 import Processing from "./src/service/Processing";
@@ -261,6 +262,12 @@ const Tab2 = TabNavigator({
 export default Navi = StackNavigator({
     LoginView: {
         screen: LoginView,
+        navigationOptions:{
+            header:null
+        }
+    },
+    ForgetPwd: {
+        screen: ForgetPwd,
         navigationOptions:{
             header:null
         }

@@ -15,20 +15,23 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import Storage from './util/DeviceStorage'
+import { NavigationActions } from 'react-navigation'
 
 //屏幕信息
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
 var {width} = dimensions.get('window');
 
-export default class LoginView extends Component {
-        constructor(props){
-            super(props);
-            this.state={username:"",password:""}
-        }
+export default class ForgetPwd extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            seconds:10,
+            sendText:"发送验证码",
+            sendClass:true
+        }
+    }
 
         render() {
             var param=NavigationActions.setParams({
@@ -38,42 +41,60 @@ export default class LoginView extends Component {
 
         return (
             <View style={styles.container}>
+                <TouchableOpacity style={{position:'absolute',top:10,left:10}} onPress={()=>{this.props.navigation.navigate("LoginView")}}>
+                    <Image style={{width:20,height:20}} source={require('../image/arrow-left.png')}/>
+                </TouchableOpacity>
                 {/*头像*/}
                 <Image style={styles.circleImage} source={require('../image/logo.png')}/>
                 <Text style={{fontSize:24,marginBottom:10}}>用心服务，美好生活</Text>
                 {/*账户*/}
-                <View style={{borderRadius:10,borderWidth:1,borderColor:'#c3c3c3',borderStyle:'solid',width:width-40,height:100,}}>
+                <View style={{borderRadius:10,borderWidth:1,borderColor:'#c3c3c3',borderStyle:'solid',width:width-40,height:150,}}>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#c3c3c3',borderBottomStyle:'solid'}}>
-                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请输入用户名'} onChangeText={(text)=>this.setState({username:text})}/>
-                        <Image source={require('../image/username.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}}/>
+                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请输入手机号'}/>
+                        <Image source={require('../image/username.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}} />
                     </View>
-                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative'}}>
-                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请输入密码'} secureTextEntry={true} onChangeText={(text)=>this.setState({password:text})}/>
-                        <Image source={require('../image/password.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}} />
+                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#c3c3c3',borderBottomStyle:'solid'}}>
+                        <TextInput style={{flex:1,fontSize:16}} placeholder={'验证码'}/>
+                        <TouchableOpacity style={this.state.sendClass?styles.btnStyle1:styles.btnStyle2} onPress={this.send.bind(this)}>
+                            <Text style={styles.loginText}>{this.state.sendText}</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',}}>
+                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请重置密码'}/>
+                        <Image source={require('../image/username.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}} />
                     </View>
                 </View>
                 {/*登录*/}
-                <TouchableOpacity style={styles.btnStyle} onPress={this.Login.bind(this)}>
-                    <Text style={styles.loginText}>登录</Text>
-                </TouchableOpacity>
-                {/*无法登录  新用户*/}
-                <TouchableOpacity style={styles.canNot} onPress={()=>{this.props.navigation.navigate("ForgetPwd")}}>
-                    <Text style={{color: '#4398ff'}}>忘记密码？别担心</Text>
+                <TouchableOpacity style={styles.btnStyle} onPress={()=>{this.props.navigation.navigate("Tab")}}>
+                    <Text style={styles.loginText}>提交</Text>
                 </TouchableOpacity>
             </View>
         );
     }
-
-    Login(){
-            alert(this.state.username);
-        //this.props.navigation.navigate("Tab");
-        Storage.get('appHotSearchTagList').then((tags) => {
-            alert(tags);
-        });
+    send(){
+        if(this.state.sendClass) {
+            var that = this;
+            var t = setInterval(function () {
+                let s = that.state.seconds - 1;
+                if (s == 0) {
+                    clearTimeout(t);
+                    that.setState({
+                        seconds: 60,
+                        sendText: "重发验证码",
+                        sendClass: true
+                    });
+                } else {
+                    that.setState({
+                        seconds: s,
+                        sendText: s + "秒后重发",
+                        sendClass: false
+                    });
+                }
+            }, 1000);
+        }
     }
+
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -82,7 +103,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#dddddd',
         //设置次轴的对齐方式
         alignItems: 'center',
-        backgroundColor:'white'
+        backgroundColor:'white',
+        position:'relative'
+
     },
     circleImage: {
         width: 80,
@@ -124,6 +147,18 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginTop: 20,
         backgroundColor: '#4398ff',
+        justifyContent: 'center',
+    },
+    btnStyle1: {
+        height: 50,
+        width: 150,
+        backgroundColor: '#4398ff',
+        justifyContent: 'center',
+    },
+    btnStyle2: {
+        height: 50,
+        width: 150,
+        backgroundColor: '#c9c9c9',
         justifyContent: 'center',
     },
     loginText: {
