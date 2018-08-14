@@ -44,24 +44,25 @@ export default class ForgetPwd extends Component {
                 <TouchableOpacity style={{position:'absolute',top:10,left:10}} onPress={()=>{this.props.navigation.navigate("LoginView")}}>
                     <Image style={{width:20,height:20}} source={require('../image/arrow-left.png')}/>
                 </TouchableOpacity>
+                <View style={{position:'absolute',top:10,textAlign:'center'}}>
+                    <Text style={{color:'#333333',fontSize:18,}}>找回密码</Text>
+                </View>
                 {/*头像*/}
                 <Image style={styles.circleImage} source={require('../image/logo.png')}/>
-                <Text style={{fontSize:24,marginBottom:10}}>用心服务，美好生活</Text>
+                <Text style={{fontSize:18,marginBottom:49,fontColor:'#4E4E4E'}}>用心服务，美好生活</Text>
                 {/*账户*/}
-                <View style={{borderRadius:10,borderWidth:1,borderColor:'#c3c3c3',borderStyle:'solid',width:width-40,height:150,}}>
-                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#c3c3c3',borderBottomStyle:'solid'}}>
-                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请输入手机号'}/>
-                        <Image source={require('../image/username.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}} />
+                <View style={{borderRadius:5,borderWidth:1,borderColor:'#E6E6E6',borderStyle:'solid',width:width-40,height:150,}}>
+                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
+                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请输入手机号'} underlineColorAndroid='transparent'/>
                     </View>
-                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#c3c3c3',borderBottomStyle:'solid'}}>
-                        <TextInput style={{flex:1,fontSize:16}} placeholder={'验证码'}/>
+                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
+                        <TextInput style={{flex:1,fontSize:16}} placeholder={'验证码'} underlineColorAndroid='transparent'/>
                         <TouchableOpacity style={this.state.sendClass?styles.btnStyle1:styles.btnStyle2} onPress={this.send.bind(this)}>
                             <Text style={styles.loginText}>{this.state.sendText}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',}}>
-                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请重置密码'}/>
-                        <Image source={require('../image/username.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}} />
+                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请重置密码'} underlineColorAndroid='transparent'/>
                     </View>
                 </View>
                 {/*登录*/}
@@ -108,13 +109,13 @@ const styles = StyleSheet.create({
 
     },
     circleImage: {
-        width: 80,
-        height: 80,
+        width: 68,
+        height: 68,
         borderRadius: 40,
         borderWidth: 2,
         borderColor: 'white',
-        marginTop: 100,
-        marginBottom: 25,
+        marginTop: 82,
+        marginBottom: 19,
     },
     canNot: {
         width: width - 40,
@@ -146,13 +147,13 @@ const styles = StyleSheet.create({
         width: width - 40,
         borderRadius: 5,
         marginTop: 20,
-        backgroundColor: '#4398ff',
+        backgroundColor: '#4077F8',
         justifyContent: 'center',
     },
     btnStyle1: {
         height: 50,
         width: 150,
-        backgroundColor: '#4398ff',
+        backgroundColor: '#4077F8',
         justifyContent: 'center',
     },
     btnStyle2: {

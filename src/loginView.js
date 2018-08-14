@@ -16,7 +16,9 @@ import {
     View
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import Storage from './util/DeviceStorage'
+import Storage from './util/DeviceStorage';
+import FetchUtil from './util/FetchUtil';
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 //屏幕信息
 var dimensions = require('Dimensions');
@@ -26,7 +28,7 @@ var {width} = dimensions.get('window');
 export default class LoginView extends Component {
         constructor(props){
             super(props);
-            this.state={username:"",password:""}
+            this.state={phone:"",password:""}
         }
 
 
@@ -40,15 +42,15 @@ export default class LoginView extends Component {
             <View style={styles.container}>
                 {/*头像*/}
                 <Image style={styles.circleImage} source={require('../image/logo.png')}/>
-                <Text style={{fontSize:24,marginBottom:10}}>用心服务，美好生活</Text>
+                <Text style={{fontSize:18,marginBottom:49,fontColor:'#4E4E4E'}}>用心服务，美好生活</Text>
                 {/*账户*/}
-                <View style={{borderRadius:10,borderWidth:1,borderColor:'#c3c3c3',borderStyle:'solid',width:width-40,height:100,}}>
-                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#c3c3c3',borderBottomStyle:'solid'}}>
-                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请输入用户名'} onChangeText={(text)=>this.setState({username:text})}/>
+                <View style={{borderRadius:5,borderWidth:1,borderColor:'#E6E6E6',borderStyle:'solid',width:width-40,height:100,}}>
+                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
+                        <TextInput style={{width:width-100,fontSize:16,fontColor:'#CECECE'}} placeholder={'请输入用户名'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({phone:text})}/>
                         <Image source={require('../image/username.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}}/>
                     </View>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative'}}>
-                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请输入密码'} secureTextEntry={true} onChangeText={(text)=>this.setState({password:text})}/>
+                        <TextInput style={{width:width-100,fontSize:16,fontColor:'#CECECE'}} placeholder={'请输入密码'} underlineColorAndroid='transparent'  secureTextEntry={true} onChangeText={(text)=>this.setState({password:text})}/>
                         <Image source={require('../image/password.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}} />
                     </View>
                 </View>
@@ -58,22 +60,27 @@ export default class LoginView extends Component {
                 </TouchableOpacity>
                 {/*无法登录  新用户*/}
                 <TouchableOpacity style={styles.canNot} onPress={()=>{this.props.navigation.navigate("ForgetPwd")}}>
-                    <Text style={{color: '#4398ff'}}>忘记密码？别担心</Text>
+                    <Text style={{color: '#4083FF'}}>忘记密码？别担心</Text>
                 </TouchableOpacity>
+                <Toast ref="toast"/>
             </View>
         );
     }
 
     Login(){
-            alert(this.state.username);
-        //this.props.navigation.navigate("Tab");
-        Storage.get('appHotSearchTagList').then((tags) => {
-            alert(tags);
-        });
+            var that=this;
+        FetchUtil.get("http://school.quspacedragon.cn/user/login",that.state,function(res){
+            //alert(response.data);
+            //that.refs.toast.show('hello world!');
+            if(res.success){
+                Storage.save('apptoken',res.data.token);
+                that.props.navigation.navigate("Tab");
+            }else{
+                that.refs.toast.show(res.message);
+            }
+        })
     }
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -85,17 +92,17 @@ const styles = StyleSheet.create({
         backgroundColor:'white'
     },
     circleImage: {
-        width: 80,
-        height: 80,
+        width: 68,
+        height: 68,
         borderRadius: 40,
         borderWidth: 2,
         borderColor: 'white',
-        marginTop: 100,
-        marginBottom: 25,
+        marginTop: 82,
+        marginBottom: 19,
     },
     canNot: {
         width: width - 40,
-        marginTop: 15,
+        marginTop: 0,
         flexDirection: 'row',
         alignItems: 'center',
         //设置主轴为两端对齐
@@ -122,8 +129,9 @@ const styles = StyleSheet.create({
         height: 50,
         width: width - 40,
         borderRadius: 5,
-        marginTop: 20,
-        backgroundColor: '#4398ff',
+        marginTop: 11,
+        marginBottom: 11,
+        backgroundColor: '#4077F8',
         justifyContent: 'center',
     },
     loginText: {

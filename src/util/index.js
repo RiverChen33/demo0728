@@ -1,5 +1,3 @@
-'use strict';
-
 import {Dimensions} from 'react-native'
 
 const deviceH = Dimensions.get('window').height
