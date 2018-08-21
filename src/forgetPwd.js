@@ -15,7 +15,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
 
 //屏幕信息
 var dimensions = require('Dimensions');
@@ -41,11 +41,11 @@ export default class ForgetPwd extends Component {
 
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={{position:'absolute',top:10,left:10}} onPress={()=>{this.props.navigation.navigate("LoginView")}}>
+                <TouchableOpacity style={{position:'absolute',top:15,left:10}} onPress={()=>{this.props.navigation.navigate("LoginView")}}>
                     <Image style={{width:20,height:20}} source={require('../image/arrow-left.png')}/>
                 </TouchableOpacity>
-                <View style={{position:'absolute',top:10,textAlign:'center'}}>
-                    <Text style={{color:'#333333',fontSize:18,}}>找回密码</Text>
+                <View style={{position:'absolute',top:15,textAlign:'center'}}>
+                    <Text style={{color:'#333333',fontSize:16,}}>找回密码</Text>
                 </View>
                 {/*头像*/}
                 <Image style={styles.circleImage} source={require('../image/logo.png')}/>
@@ -53,16 +53,16 @@ export default class ForgetPwd extends Component {
                 {/*账户*/}
                 <View style={{borderRadius:5,borderWidth:1,borderColor:'#E6E6E6',borderStyle:'solid',width:width-40,height:150,}}>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
-                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请输入手机号'} underlineColorAndroid='transparent'/>
+                        <TextInput style={{width:width-100,fontSize:14}} placeholder={'请输入手机号'} underlineColorAndroid='transparent'/>
                     </View>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
-                        <TextInput style={{flex:1,fontSize:16}} placeholder={'验证码'} underlineColorAndroid='transparent'/>
+                        <TextInput style={{flex:1,fontSize:14}} placeholder={'验证码'} underlineColorAndroid='transparent'/>
                         <TouchableOpacity style={this.state.sendClass?styles.btnStyle1:styles.btnStyle2} onPress={this.send.bind(this)}>
                             <Text style={styles.loginText}>{this.state.sendText}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',}}>
-                        <TextInput style={{width:width-100,fontSize:16}} placeholder={'请重置密码'} underlineColorAndroid='transparent'/>
+                        <TextInput style={{width:width-100,fontSize:14}} placeholder={'请重置密码'} underlineColorAndroid='transparent'/>
                     </View>
                 </View>
                 {/*登录*/}
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
         textAlignVertical: 'center',
-        fontSize:18,
+        fontSize:16,
     },
     textContainer:{
         paddingLeft:10,

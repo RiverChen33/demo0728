@@ -19,7 +19,7 @@ import { NavigationActions } from 'react-navigation';
 import Storage from './util/DeviceStorage';
 import FetchUtil from './util/FetchUtil';
 import Toast, {DURATION} from 'react-native-easy-toast'
-
+import px2dp from './util';
 //屏幕信息
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
@@ -42,15 +42,15 @@ export default class LoginView extends Component {
             <View style={styles.container}>
                 {/*头像*/}
                 <Image style={styles.circleImage} source={require('../image/logo.png')}/>
-                <Text style={{fontSize:18,marginBottom:49,fontColor:'#4E4E4E'}}>用心服务，美好生活</Text>
+                <Text style={{fontSize:px2dp(18),marginBottom:49,fontColor:'#4E4E4E'}}>用心服务，美好生活</Text>
                 {/*账户*/}
                 <View style={{borderRadius:5,borderWidth:1,borderColor:'#E6E6E6',borderStyle:'solid',width:width-40,height:100,}}>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
-                        <TextInput style={{width:width-100,fontSize:16,fontColor:'#CECECE'}} placeholder={'请输入用户名'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({phone:text})}/>
+                        <TextInput style={{width:width-100,fontSize:px2dp(14),fontColor:'#CECECE',paddingVertical: 0}} placeholder={'请输入用户名'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({phone:text})}/>
                         <Image source={require('../image/username.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}}/>
                     </View>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative'}}>
-                        <TextInput style={{width:width-100,fontSize:16,fontColor:'#CECECE'}} placeholder={'请输入密码'} underlineColorAndroid='transparent'  secureTextEntry={true} onChangeText={(text)=>this.setState({password:text})}/>
+                        <TextInput style={{width:width-100,fontSize:px2dp(14),fontColor:'#CECECE'}} placeholder={'请输入密码'} underlineColorAndroid='transparent'  secureTextEntry={true} onChangeText={(text)=>this.setState({password:text})}/>
                         <Image source={require('../image/password.png')} style={{width:20,height:20,alignSelf:'center',position:'absolute',right:10}} />
                     </View>
                 </View>
@@ -60,7 +60,7 @@ export default class LoginView extends Component {
                 </TouchableOpacity>
                 {/*无法登录  新用户*/}
                 <TouchableOpacity style={styles.canNot} onPress={()=>{this.props.navigation.navigate("ForgetPwd")}}>
-                    <Text style={{color: '#4083FF'}}>忘记密码？别担心</Text>
+                    <Text style={{color: '#4083FF',fontSize:px2dp(12)}}>忘记密码？别担心</Text>
                 </TouchableOpacity>
                 <Toast ref="toast"/>
             </View>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
         textAlignVertical: 'center',
-        fontSize:18,
+        fontSize:px2dp(16),
     },
     textContainer:{
         paddingLeft:10,

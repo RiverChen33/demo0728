@@ -33,16 +33,42 @@ class Mine extends Component {
     render() {
         return (
             <ScrollView style={styles.container}>
-                <View style={{paddingTop:30,backgroundColor:'green',textAlign:'center'}}>
+                <View style={{paddingTop:30,backgroundColor:'white',textAlign:'center'}}>
                     <Image source={require('../image/logo.png')} style={styles.imgicon}/>
-                    <Text style={{color:'white',paddingTop:10,paddingBottom:20,textAlign:'center',fontSize:18}}>Mr.River</Text>
+                        <Text style={{color:'#565656',paddingTop:10,paddingBottom:20,textAlign:'center',fontSize:18}}>Mr.River</Text>
+                </View>
+                <View style={{flexDirection:"row",paddingTop:10,paddingBottom:20,marginBottom:10,backgroundColor:'white'}}>
+                    <View style={styles.item}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Tab3")}}>
+                            <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
+                            <Text>工单记录</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.item}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Tab2")}}>
+                            <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
+                            <Text>评价</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.item}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Tab2")}}>
+                            <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
+                            <Text>安全中心</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.item}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Tab2")}}>
+                            <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
+                            <Text>钥匙</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <FlatList
-                    data={[{key: '培训',num:20,time:'2018-07-18'},{key: '培训',num:20,time:'2018-07-18'},{key: '培训',num:20,time:'2018-07-18'}]}
+                    data={[{key: '帮助与支持',page:''},{key: '常见问题'},{key: '新手指引'}]}
                     renderItem={({item}) =>
-                        <View style={{flexDirection:'row'}}>
+                        <View style={{flexDirection:'row',backgroundColor:'white'}}>
                             <Image source={require('../image/ic_home.png')} style={styles.imgicon2}/>
-                            <View style={{lineHeight:30,flex:1,borderBottomStyle:'solid',borderBottomWidth:1,borderBottomColor:'#c3c3c3',justifyContent:'center',color:'black',position:'relative'}}>
+                            <View style={{lineHeight:40,flex:1,borderBottomStyle:'solid',borderBottomWidth:1,borderBottomColor:'#c3c3c3',justifyContent:'center',color:'black',position:'relative'}}>
                                 <Text>{item.key}</Text>
                                 <Image source={require('../image/arrow.png')} style={{position:'absolute',right:10,width:18,height:18}}/>
                             </View>
@@ -67,14 +93,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderWidth:1,
         borderStyle:'solid',
-        borderColor:'green',
+        borderColor:'#4077F8',
         borderRadius:5,
         alignSelf:'center'
     },
     loginText: {
         textAlign: 'center',
-        color: 'green',
+        color: '#4077F8',
         textAlignVertical: 'center',
+        fontSize:14
     },
     imgicon:{
         width:60,height:60,
@@ -83,6 +110,12 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         borderRadius:60
     },
+    imgicon3:{
+        width:30,height:30,
+        alignSelf:'center',
+        textAlign:'center',
+        justifyContent:'center',
+    },
     imgicon2:{
         width:30,height:30,
         alignSelf:'center',
@@ -90,10 +123,10 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         borderRadius:30,
         margin:10,
-        marginTop:5,marginBottom:5
+        marginTop:5,marginBottom:5,
     },
     container: {
-        backgroundColor:'white'
+        backgroundColor:'#eaeaea'
     },
     //底部指示器的样式
     indicator: {
@@ -112,13 +145,20 @@ const styles = StyleSheet.create({
     selected: {
         marginLeft: 10,
         fontSize: 40,
-        color: '#5CB85C'
+        color: '#4083FF'
     },
     unselected: {
         marginLeft: 10,
         fontSize: 40,
         color: 'white'
-    }
+    },
+    item:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center',
+        textAlign:'center',
+        position:'relative',
+    },
 });
 
 module.exports = Mine;
