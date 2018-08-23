@@ -68,7 +68,7 @@ class Mine extends Component {
                     renderItem={({item}) =>
                         <View style={{flexDirection:'row',backgroundColor:'white'}}>
                             <Image source={require('../image/ic_home.png')} style={styles.imgicon2}/>
-                            <View style={{lineHeight:40,flex:1,borderBottomStyle:'solid',borderBottomWidth:1,borderBottomColor:'#c3c3c3',justifyContent:'center',color:'black',position:'relative'}}>
+                            <View style={{lineHeight:40,flex:1,borderBottomStyle:'solid',borderBottomWidth:1,borderBottomColor:'#eee',justifyContent:'center',color:'black',position:'relative'}}>
                                 <Text>{item.key}</Text>
                                 <Image source={require('../image/arrow.png')} style={{position:'absolute',right:10,width:18,height:18}}/>
                             </View>

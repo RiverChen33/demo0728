@@ -3,10 +3,54 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View,ScrollView,Image,TouchableOpacity,StatusBar
+    View,ScrollView,Image,TouchableOpacity,StatusBar,BackAndroid
 } from 'react-native';
 
+
 export default class Home extends Component {
+    static navigationOptions = {
+        headerTitle: '首页',
+        gestureResponseDistance: {horizontal: 300},
+        headerBackTitle: null,
+        headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+        headerTitleStyle: {
+            color: 'white',
+            //设置标题的大小
+            fontSize: 16,
+            //居中显示
+            alignSelf: 'center',
+            textAlign:'center',
+        },
+        headerRight:<View/>,
+        headerLeft:<View/>,
+    }
+
+    // componentWillMount() {
+    //     if (Platform.OS === 'android') {
+    //         BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+    //     }
+    // }
+    // componentWillUnmount() {
+    //     if (Platform.OS === 'android') {
+    //         BackAndroid.removeEventListener('hardwareBackPress', this.onBackAndroid);
+    //     }
+    // }
+    // onBackAndroid = () => {
+    //     const routeName=this.props.navigation.state.routeName;
+    //
+    //     if(routeName=="LoginView"||routeName=="Home"||routeName=="Mine"){
+    //
+    //     }
+    //
+    //     const nav = this.navigation;
+    //     const routers = nav.getCurrentRoutes();
+    //     if (routers.length > 1) {
+    //         nav.pop();
+    //         return true;
+    //     }
+    //     return false;
+    // };
+
     render() {
         return (
             <ScrollView style={{backgroundColor:'white'}} showsVerticalScrollIndicator={false} >
@@ -27,16 +71,20 @@ export default class Home extends Component {
                             <CubicFunc text="欠费管理">
                             </CubicFunc>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Demo2')}>
-                            <CubicFunc text="宝石">
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('ZhuHuList')}>
+                            <CubicFunc text="住户管理">
                             </CubicFunc>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Demo2')}>
-                            <CubicFunc text="宝石">
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('KaoPinList')}>
+                            <CubicFunc text="品质考评">
                             </CubicFunc>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Demo2')}>
-                            <CubicFunc text="宝石">
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('JianChaList')}>
+                            <CubicFunc text="品质检查">
+                            </CubicFunc>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('ZhengGai')}>
+                            <CubicFunc text="品质整改">
                             </CubicFunc>
                         </TouchableOpacity>
                     </ScrollView>
@@ -129,7 +177,7 @@ const styles=StyleSheet.create({
         alignItems:'center',
         borderWidth:1,
         borderStyle:'solid',
-        borderColor:'#c3c3c3',
+        borderColor:'#eee',
         flexDirection:'row',
         flex:1,
         margin:3,
@@ -143,7 +191,7 @@ const styles=StyleSheet.create({
         alignItems:'center',
         borderWidth:1,
         borderStyle:'solid',
-        borderColor:'#c3c3c3',
+        borderColor:'#eee',
         flex:1,
         margin:3,
         backgroundColor:'#f7f9fb'
@@ -157,7 +205,7 @@ const styles=StyleSheet.create({
         alignItems:'center',
         borderWidth:1,
         borderStyle:'solid',
-        borderColor:'#c3c3c3',
+        borderColor:'#eee',
         marginRight:5,
 
     }

@@ -97,7 +97,7 @@ export default  class Home1 extends Component {
                         {this.getIndicators()}
                     </View>
                 </View>
-                <View style={{flexDirection:"row",paddingTop:10,paddingBottom:20,borderBottomWidth:1,borderBottomColor:'#c3c3c3',borderBottomStyle:'solid'}}>
+                <View style={{flexDirection:"row",paddingTop:10,paddingBottom:20,borderBottomWidth:1,borderBottomColor:'#eee',borderBottomStyle:'solid'}}>
                     <View style={styles.item}>
                         <Image source={require('../image/ic_home.png')} style={styles.imgicon}/>
                         <Text>建议</Text>

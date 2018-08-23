@@ -30,6 +30,23 @@ import allGD from "./src/GDRecord/allGD";
 import allGD1 from "./src/GDRecord/allGD1";
 import BaoShi from "./src/ServerCenter/BaoShi";
 import QianFei from "./src/ServerCenter/QianFei";
+import ZhengGai from "./src/ServerCenter/ZhengGai/ZhengGai";
+import ZhengGaiDetail from "./src/ServerCenter/ZhengGai/ZhengGaiDetail";
+import ZhuHu from "./src/ServerCenter/ZhuHu/ZhuHu";
+import ZhengGaiYanShou from "./src/ServerCenter/ZhengGai/ZhengGaiYanShou";
+import KaoPinKouFen from "./src/ServerCenter/KaoPin/KaoPinKouFen";
+import JianChaDian from "./src/ServerCenter/KaoPin/JianChaDian";
+import CheckList from "./src/ServerCenter/KaoPin/CheckList";
+import KaoPinList from "./src/ServerCenter/KaoPin/KaoPinList";
+import CheckDetail from "./src/ServerCenter/KaoPin/CheckDetail";
+import JianChaList from "./src/ServerCenter/JianCha/JianChaList";
+import JCCheckDetail from "./src/ServerCenter/JianCha/JCCheckDetail";
+import JianChaHistory from "./src/ServerCenter/JianCha/JianChaHistory";
+import JianChaZhengGai from "./src/ServerCenter/JianCha/JianChaZhengGai";
+import JianChaHeGe from "./src/ServerCenter/JianCha/JianChaHeGe";
+import JianChaClose from "./src/ServerCenter/JianCha/JianChaClose";
+import SelectPeople from "./src/ServerCenter/JianCha/SelectPeople";
+import ZhuHuList from "./src/ServerCenter/ZhuHu/ZhuHuList";
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -44,20 +61,6 @@ const Tab = TabNavigator({
         screen: Home,
         navigationOptions: {
             //stackNavigator的属性
-            headerTitle: '金磐网络科技园',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 16,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            headerLeft:<View/>,
             //tab 的属性
             tabBarLabel: '首页',
             tabBarIcon: ({tintColor}) => (
@@ -400,16 +403,125 @@ export default Navi = StackNavigator({
             // headerLeft:<View/>,
         }
     },
-    // Home:{
-    //     screen:Home,
-    //     navigationOptions:{
-    //         headerTitle:"科技园",
-    //         headerRight:<View></View>,
-    //         headerTitleStyle:{
-    //             flex:1,fontSize:18,color:"red",textAlign:'center'
-    //         }
-    //     }
-    // },
+    ZhengGai: {
+        screen: ZhengGai,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '品质整改',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+        }
+    },
+    ZhengGaiDetail: {
+        screen: ZhengGaiDetail,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '整改详情',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+        }
+    },
+    ZhengGaiYanShou: {
+        screen: ZhengGaiYanShou,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '整改详情',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+        }
+    },
+    KaoPinKouFen: {
+        screen: KaoPinKouFen,
+    },
+    KaoPinList: {
+        screen: KaoPinList,
+    },
+    CheckDetail: {
+        screen: CheckDetail,
+    },
+    JianChaList: {
+        screen: JianChaList,
+    },
+    JCCheckDetail: {
+        screen: JCCheckDetail,
+    },
+    JianChaHistory: {
+        screen: JianChaHistory,
+    },
+    JianChaZhengGai: {
+        screen: JianChaZhengGai,
+    },
+    JianChaHeGe: {
+        screen: JianChaHeGe,
+    },
+    JianChaClose: {
+    screen: JianChaClose,
+    },
+    SelectPeople: {
+        screen: SelectPeople,
+    },
+    ZhuHuList: {
+        screen: ZhuHuList,
+    },
+    JianChaDian: {
+        screen: JianChaDian,
+    },
+    CheckList: {
+        screen: CheckList,
+    },
+    ZhuHu: {
+        screen: ZhuHu,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '住户管理',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+        }
+    },
     Tab:{
         screen:Tab
     },
@@ -420,7 +532,7 @@ export default Navi = StackNavigator({
         screen:Tab3
     }
 },{
-    initialRouteName:'Tab',
+    initialRouteName:'LoginView',
 });
 
 

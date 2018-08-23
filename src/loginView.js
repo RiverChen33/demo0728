@@ -55,7 +55,7 @@ export default class LoginView extends Component {
                     </View>
                 </View>
                 {/*登录*/}
-                <TouchableOpacity style={styles.btnStyle} onPress={this.Login.bind(this)}>
+                <TouchableOpacity style={styles.btnStyle} onPress={()=>this.Login()}>
                     <Text style={styles.loginText}>登录</Text>
                 </TouchableOpacity>
                 {/*无法登录  新用户*/}
@@ -67,14 +67,23 @@ export default class LoginView extends Component {
         );
     }
 
-    Login(){
+    Login=()=>{
             var that=this;
         FetchUtil.get("http://school.quspacedragon.cn/user/login",that.state,function(res){
             //alert(response.data);
             //that.refs.toast.show('hello world!');
             if(res.success){
                 Storage.save('apptoken',res.data.token);
-                that.props.navigation.navigate("Tab");
+                //that.props.navigation.navigate("Tab");
+
+               let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'Tab'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+
             }else{
                 that.refs.toast.show(res.message);
             }
