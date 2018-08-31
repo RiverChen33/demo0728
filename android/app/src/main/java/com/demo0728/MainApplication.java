@@ -3,6 +3,7 @@ package com.demo0728;
 import android.app.Application;
 
 import com.imagepicker.ImagePickerPackage;
+import com.reactnativecomponent.barcode.RCTCapturePackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -24,7 +25,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new ImagePickerPackage()
+          new ImagePickerPackage(),
+          new RCTCapturePackage()
       );
     }
 

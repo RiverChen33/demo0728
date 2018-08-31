@@ -57,6 +57,7 @@ export default class BaoShi extends Component {
     render() {
         let display=this.state.time=="1"?"none":"";
         return (
+            <View style={{flex:1}}>
             <ScrollView style={{flex:1}}>
                 <View style={styles.container}>
                     <View style={styles.line}>
@@ -161,27 +162,28 @@ export default class BaoShi extends Component {
                 <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
                     <Text style={styles.loginText}>提交</Text>
                 </TouchableOpacity>
-                <AwesomeAlert
-                    show={this.state.alertInfo.showAlert}
-                    showProgress={false}
-                    title={this.state.alertInfo.title}
-                    message={this.state.alertInfo.message}
-                    closeOnTouchOutside={true}
-                    closeOnHardwareBackPress={false}
-                    showCancelButton={false}
-                    showConfirmButton={true}
-                    cancelText="取消"
-                    confirmText="确定"
-                    confirmButtonColor="#4083FF"
-                    onCancelPressed={() => {
-                        this.hideAlert();
-                    }}
-                    onConfirmPressed={() => {
-                        this.hideAlert();
-                    }}
-                />
-            </ScrollView>
 
+            </ScrollView>
+            <AwesomeAlert
+                show={this.state.alertInfo.showAlert}
+                showProgress={false}
+                title={this.state.alertInfo.title}
+                message={this.state.alertInfo.message}
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showCancelButton={false}
+                showConfirmButton={true}
+                cancelText="取消"
+                confirmText="确定"
+                confirmButtonColor="#4083FF"
+                onCancelPressed={() => {
+                    this.hideAlert();
+                }}
+                onConfirmPressed={() => {
+                    this.hideAlert();
+                }}
+            />
+            </View>
         )
     };
     showAlert = () => {

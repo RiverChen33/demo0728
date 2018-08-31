@@ -3,7 +3,7 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View,ScrollView,Image,TouchableOpacity,StatusBar,BackAndroid
+    View,ScrollView,Image,TouchableOpacity,StatusBar,BackAndroid,Alert
 } from 'react-native';
 
 
@@ -89,28 +89,59 @@ export default class Home extends Component {
                         </TouchableOpacity>
                     </ScrollView>
                 </View>
-                <View></View>
                 <View style={{marginLeft:10,marginBottom:15}}>
                     <Text style={styles.title}>保安</Text>
                     <View style={{flexDirection:'row'}}>
-                        <LRFunc source={require('../image/ic_home.png')} text="抄水表"></LRFunc>
-                        <LRFunc source={require('../image/ic_home.png')} text="抄电表"></LRFunc>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('BarcodeTest')} style={{flex:1}}>
+                            <LRFunc2 source={require('../image/ic_home.png')} text="访客查验"></LRFunc2>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('WeiXiuTab')} style={{flex:1}}>
+                            <LRFunc2 source={require('../image/ic_home.png')} text="车辆违停"></LRFunc2>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
+                            <LRFunc2 source={require('../image/ic_home.png')} text="上报事件"></LRFunc2>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={{marginLeft:10,marginBottom:15}}>
+                    <Text style={styles.title}>工程人员</Text>
+                    <View style={{flexDirection:'row',flex:1}}>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('ShuiBiaoList')} style={{flex:1}}>
+                            <LRFunc source={require('../image/ic_home.png')} text="抄水表"></LRFunc>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('DianBiaoList')} style={{flex:1}}>
+                            <LRFunc source={require('../image/ic_home.png')} text="抄电表"></LRFunc>
+                        </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:'row'}}>
-                        <LRFunc2 source={require('../image/ic_home.png')} text="设备巡检"></LRFunc2>
-                        <LRFunc2 source={require('../image/ic_home.png')} text="设备维修"></LRFunc2>
-                        <LRFunc2 source={require('../image/ic_home.png')} text="维修派工"></LRFunc2>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('XunJianList')} style={{flex:1}}>
+                            <LRFunc2 source={require('../image/ic_home.png')} text="设备巡检"></LRFunc2>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('WeiXiuTab')} style={{flex:1}}>
+                            <LRFunc2 source={require('../image/ic_home.png')} text="设备维修"></LRFunc2>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
+                            <LRFunc2 source={require('../image/ic_home.png')} text="维修派工"></LRFunc2>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{marginLeft:10,marginBottom:15}}>
                     <Text style={styles.title}>招商租赁</Text>
                     <View style={{flexDirection:'row'}}>
-                        <LRFunc source={require('../image/ic_home.png')} text="资源管理"></LRFunc>
-                        <LRFunc source={require('../image/ic_home.png')} text="客户管理"></LRFunc>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('ResourceList')} style={{flex:1}}>
+                            <LRFunc source={require('../image/ic_home.png')} text="资源管理"></LRFunc>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('CustomerList')} style={{flex:1}}>
+                            <LRFunc source={require('../image/ic_home.png')} text="客户管理"></LRFunc>
+                        </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:'row'}}>
-                        <LRFunc source={require('../image/ic_home.png')} text="合同管理"></LRFunc>
-                        <LRFunc source={require('../image/ic_home.png')} text="运营管理"></LRFunc>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
+                            <LRFunc source={require('../image/ic_home.png')} text="合同管理"></LRFunc>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
+                            <LRFunc source={require('../image/ic_home.png')} text="运营管理"></LRFunc>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
@@ -171,7 +202,6 @@ const styles=StyleSheet.create({
     LRFunc:{
         borderRadius:3,
         height:80,
-        width:80,
         textAlign:"center",
         justifyContent:'space-between',
         alignItems:'center',

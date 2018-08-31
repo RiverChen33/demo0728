@@ -4,15 +4,19 @@ import {
     StyleSheet,
     Text,
     View,
-    ScrollView,FlatList,Image,TouchableOpacity
+    ScrollView,FlatList,Image,TouchableOpacity,TextInput
+
 } from 'react-native';
+import px2dp from '../../util';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
 var {width} = dimensions.get('window');
 
-export default class JCCheckDetail extends Component {
+export default class DianBiaoDetail extends Component {
     static navigationOptions = {
-        headerTitle: '品质检查详情',
+        headerTitle: '抄电表',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
         headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
@@ -35,6 +39,11 @@ export default class JCCheckDetail extends Component {
                 list:[{status:'提出更改',desc:'问题',time:'2018-05-02'},
                     {status:'通知验收',desc:'问题',time:'2018-05-03'}],
             images:[]
+            },
+            alertInfo:{
+                showAlert:false,
+                title:'温馨提示',
+                message:'提交成功'
             }
         }
     }
@@ -52,42 +61,71 @@ export default class JCCheckDetail extends Component {
                         <Text style={{color:'#929292',fontSize:14}}>专业：{this.state.detail.desc}</Text>
                     </View>
                     <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14}}>
-                        <Text style={{color:'#929292',fontSize:14}}>检查项：{this.state.detail.date}</Text>
+                        <Text style={{color:'#929292',fontSize:14}}>上次读数：{this.state.detail.date}</Text>
                     </View>
+
                 </View>
                 <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginBottom:10}}>
-                    <View style={{height:40,justifyContent:'center',}}>
-                        <Text style={{color:'#929292',fontSize:14}}>质量绩效指标：{this.state.detail.desc}</Text>
-                    </View>
-                    <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14}}>
-                        <Text style={{color:'#929292',fontSize:14}}>检查方法：{this.state.detail.date}</Text>
-                    </View>
-                    <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14}}>
-                        <Text style={{color:'#929292',fontSize:14}}>检查周期：{this.state.detail.date}</Text>
+                    <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center'}}>
+                        <Text style={{color:'#929292',fontSize:14}}>本次读数：</Text>
+                        <TextInput style={{alignSelf:'center',height:40,flex:1,fontSize:px2dp(12),fontColor:'#CECECE'}} placeholder={'请输入本次读数'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({phone:text})}/>
                     </View>
                 </View>
-
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaHistory")} style={{width:width,height:40,alignItems:'center',justifyContent:'center',flex:1,alignSelf:'center',backgroundColor:'white'}}>
-                    <Text style={{color:'#4083FF',fontSize:14}}>查看历史记录</Text>
+                <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
+                    <Text style={styles.loginText}>提交</Text>
                 </TouchableOpacity>
             </ScrollView>
-                <View style={{height:40,width:width,justifyContent:'center',flexDirection:'row'}}>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaClose")} style={{height:40,justifyContent:'center',flex:1,alignItems:'center',borderRightWidth:1,borderColor:'#eee',borderStyle:'solid',backgroundColor:'white'}}>
-                        <Text style={{color:'#4083FF',fontSize:10}}>无法检查</Text>
-                        <Text style={{color:'#4083FF',fontSize:10}}>(关闭此任务)</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaZhengGai")} style={{height:40,alignItems:'center',justifyContent:'center',flex:1,alignSelf:'center',backgroundColor:'white'}}>
-                        <Text style={{color:'#4083FF',fontSize:14}}>整改</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaHeGe")} style={{height:40,alignItems:'center',justifyContent:'center',flex:1,alignSelf:'center',backgroundColor:'#4083FF'}}>
-                        <Text style={{color:'white',fontSize:14}}>合格</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <AwesomeAlert
+        show={this.state.alertInfo.showAlert}
+        showProgress={false}
+        title={this.state.alertInfo.title}
+        message={this.state.alertInfo.message}
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={false}
+        showConfirmButton={true}
+        cancelText="取消"
+        confirmText="确定"
+        confirmButtonColor="#4083FF"
+        onCancelPressed={() => {
+            this.hideAlert();
+        }}
+        onConfirmPressed={() => {
+            this.hideAlert();
+        }}
+    />
+    </View>
         )
     };
+    Submit(){
+        var that=this;
+        this.setState({
+            alertInfo:{
+                showAlert:true,
+                title:'温馨提示',
+                message:'提交成功'
+            }
+        })
+        setTimeout(()=>{
+            that.props.navigation.navigate("Home");
+        },2000);
+    }
 
+    showAlert = () => {
+        this.setState({
+            alertInfo:{
+                showAlert:true
+            }
+        });
+    };
 
+    hideAlert = () => {
+        this.setState({
+            alertInfo:{
+                showAlert:false
+            }
+        });
+    };
 }
 
 const styles=StyleSheet.create({
@@ -110,5 +148,21 @@ const styles=StyleSheet.create({
         borderBottomColor:'#c9c9c9',
         borderBottomWidth:1,
         borderStyle:'solid'
-    }
+    },
+    btnStyle: {
+        height: 50,
+        width: width - 40,
+        borderRadius: 5,
+        marginTop: 11,
+        marginBottom: 11,
+        backgroundColor: '#4077F8',
+        justifyContent: 'center',
+        alignSelf:'center'
+    },
+    loginText: {
+        textAlign: 'center',
+        color: 'white',
+        textAlignVertical: 'center',
+        fontSize:px2dp(16),
+    },
 })

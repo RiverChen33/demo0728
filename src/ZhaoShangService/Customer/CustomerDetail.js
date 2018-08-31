@@ -10,9 +10,9 @@ var dimensions = require('Dimensions');
 //获取屏幕的宽度
 var {width} = dimensions.get('window');
 
-export default class JCCheckDetail extends Component {
+export default class CustomerDetail extends Component {
     static navigationOptions = {
-        headerTitle: '品质检查详情',
+        headerTitle: '客户详情',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
         headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
@@ -44,51 +44,47 @@ export default class JCCheckDetail extends Component {
         return (
             <View style={{flex:1}}>
             <ScrollView style={{flex:1}}>
+                <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,margin:10,height:100,justifyContent:'center',borderRadius:5}}>
+                    <View style={{flexDirection:'row',alignItems:'center',paddingBottom:15}}>
+                        <Text style={{fontSize:16,fontWeight:'600',paddingRight:15}}>老王</Text>
+                        <Text style={{fontSize:12,color:'#929292',alignSelf:'center'}}>普通违约1次|普通违约1次|普通违约1次</Text>
+                    </View>
+                    <Text style={{fontSize:14,textAlign:'left',color:'white',height:20,backgroundColor:'#4083FF',alignSelf:'flex-start',marginLeft:5}}>个人</Text>
+                </View>
                 <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginBottom:10}}>
                     <View style={{height:40,justifyContent:'center'}}>
-                        <Text style={{fontSize:16,fontWeight:'600'}}>检查点：{this.state.detail.class}</Text>
+                        <Text style={{fontSize:16,fontWeight:'600'}}>基础资料</Text>
                     </View>
                     <View style={{height:40,justifyContent:'center',}}>
-                        <Text style={{color:'#929292',fontSize:14}}>专业：{this.state.detail.desc}</Text>
+                        <Text style={{color:'#929292',fontSize:14}}>手机：{this.state.detail.desc}</Text>
                     </View>
                     <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14}}>
-                        <Text style={{color:'#929292',fontSize:14}}>检查项：{this.state.detail.date}</Text>
+                        <Text style={{color:'#929292',fontSize:14}}>邮箱：{this.state.detail.date}</Text>
                     </View>
-                </View>
-                <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginBottom:10}}>
                     <View style={{height:40,justifyContent:'center',}}>
-                        <Text style={{color:'#929292',fontSize:14}}>质量绩效指标：{this.state.detail.desc}</Text>
+                        <Text style={{color:'#929292',fontSize:14}}>地址：{this.state.detail.desc}</Text>
                     </View>
                     <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14}}>
-                        <Text style={{color:'#929292',fontSize:14}}>检查方法：{this.state.detail.date}</Text>
-                    </View>
-                    <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14}}>
-                        <Text style={{color:'#929292',fontSize:14}}>检查周期：{this.state.detail.date}</Text>
+                        <Text style={{color:'#929292',fontSize:14}}>详情：{this.state.detail.date}</Text>
                     </View>
                 </View>
-
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaHistory")} style={{width:width,height:40,alignItems:'center',justifyContent:'center',flex:1,alignSelf:'center',backgroundColor:'white'}}>
-                    <Text style={{color:'#4083FF',fontSize:14}}>查看历史记录</Text>
-                </TouchableOpacity>
+                <View style={{backgroundColor:'white',margin:5,height:40,justifyContent:'center',borderRadius:5,flexDirection:'row'}}>
+                    <Text style={{color:'#565656',fontSize:14,flex:1,alignSelf:'center'}}>合同信息（1）</Text>
+                    <Text style={{color:'#565656',fontSize:14,flex:1,alignSelf:'center'}}>合同信息（1）</Text>
+                    <Text style={{color:'#565656',fontSize:14,flex:1,alignSelf:'center'}}>合同信息（1）</Text>
+                    <Text style={{color:'#565656',fontSize:14,flex:1,alignSelf:'center'}}>合同信息（1）</Text>
+                </View>
             </ScrollView>
-                <View style={{height:40,width:width,justifyContent:'center',flexDirection:'row'}}>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaClose")} style={{height:40,justifyContent:'center',flex:1,alignItems:'center',borderRightWidth:1,borderColor:'#eee',borderStyle:'solid',backgroundColor:'white'}}>
-                        <Text style={{color:'#4083FF',fontSize:10}}>无法检查</Text>
-                        <Text style={{color:'#4083FF',fontSize:10}}>(关闭此任务)</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaZhengGai")} style={{height:40,alignItems:'center',justifyContent:'center',flex:1,alignSelf:'center',backgroundColor:'white'}}>
-                        <Text style={{color:'#4083FF',fontSize:14}}>整改</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaHeGe")} style={{height:40,alignItems:'center',justifyContent:'center',flex:1,alignSelf:'center',backgroundColor:'#4083FF'}}>
-                        <Text style={{color:'white',fontSize:14}}>合格</Text>
+                <View style={{height:40,width:width,justifyContent:'center',backgroundColor:'#4083FF'}}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("CustomerAdd")} style={{flexDirection:'row',justifyContent:'center'}}>
+                    <Text style={{color:'white'}}>修改信息</Text>
                     </TouchableOpacity>
                 </View>
             </View>
         )
     };
-
-
 }
+
 
 const styles=StyleSheet.create({
     title:{

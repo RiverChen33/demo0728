@@ -33,9 +33,9 @@ var photoOptions = {
     }
 }
 var index=0;
-export default class JianChaHeGe extends Component {
+export default class PaiGongZhuanPai extends Component {
     static navigationOptions = {
-        headerTitle: '合格说明',
+        headerTitle: '转派',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
         headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
@@ -54,8 +54,12 @@ export default class JianChaHeGe extends Component {
     constructor(props){
         super(props);
         this.state={
+            id:'',
             content:"",
             images:[],
+            timeflag:'1',
+            name:'',
+            date:'',
             alertInfo:{
                 showAlert:false,
                 title:'温馨提示',
@@ -70,29 +74,15 @@ export default class JianChaHeGe extends Component {
             <ScrollView style={{flex:1}}>
                 <View style={styles.container}>
                         <TextInput placeholder="请填写说明" underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656'}} multiline={true}/>
-                        <View style={{alignSelf:'flex-start',flexDirection:'row'}}>
-                            <TouchableOpacity onPress={()=>this.openMycamera()} style={{}}>
-                                <View style={{width:70,height:70,alignContent:'center',alignSelf:'center',justifyContent:'center',backgroundColor:'white',borderRadius:5,borderStyle:'solid',borderWidth:1,borderColor:'#c9c9c9'}}>
-                                    <Image style={{width:40,height:40,alignSelf:'center',justifyContent:'center'}} source={require('../../../image/add.png')}/>
-                                </View>
-                            </TouchableOpacity>
-
-                            { this.state.images.length ==0 ? null :
-                                <FlatList
-                                    horizontal={true}
-                                    data={this.state.images}
-                                    extraData={this.state}
-                                    renderItem={({item}) =>
-                                        <View style={{width:70,height:70,marginLeft:10,position:'relative',flexDirection:'row'}}>
-                                            <Image style={{width:70,height:70}} source={item} />
-                                            <TouchableOpacity onPress={()=>this.deleteImg(item.index)} style={{position:'absolute',top:0,right:0}}>
-                                                <Image style={{width:20,height:20,}} source={require('../../../image/delete.png')}/>
-                                            </TouchableOpacity>
-                                        </View>
-                                    }
-                                />
-                            }
-                        </View>
+                </View>
+                <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginTop:10}}>
+                    <View style={{height:40,justifyContent:'center',flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                        <Text style={{color:'#929292',fontSize:14,width:100}}>处理人：</Text>
+                        <TouchableOpacity style={{flex:1,flexDirection:'row',justifyContent:'flex-end'}} onPress={this.selectPeople.bind(this)}>
+                            <Text>{this.state.name==''?'请选择':this.state.name}</Text>
+                            <Image style={{width:16,height:16,alignSelf:'flex-end'}} source={require('../../../image/arrow.png')}/>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
@@ -121,6 +111,14 @@ export default class JianChaHeGe extends Component {
             </View>
         )
     };
+    selectPeople=()=>{
+        this.props.navigation.navigate('PaiGongSelectPeople', {returnData: this.returnData.bind(this)});
+    }
+
+    returnData(id, name) {
+        this.setState({id: id, name: name});
+    }
+
     showAlert = () => {
         this.setState({
             alertInfo:{

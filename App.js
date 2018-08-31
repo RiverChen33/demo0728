@@ -18,11 +18,12 @@ import {
     StackNavigator,
 } from 'react-navigation';
 import Demo1 from "./src/Demo1";
-import Demo2 from "./src/Demo2";
+import BarcodeTest  from "./src/BarcodeTest ";
 import LoginView from "./src/loginView";
 import ForgetPwd from "./src/forgetPwd";
 import Mine from "./src/Mine";
 import Home from "./src/Home";
+import Missions from "./src/Missions";
 import Processing from "./src/service/Processing";
 import BeEvaluted from "./src/service/BeEvaluted";
 import Finish from "./src/service/Finish";
@@ -47,6 +48,27 @@ import JianChaHeGe from "./src/ServerCenter/JianCha/JianChaHeGe";
 import JianChaClose from "./src/ServerCenter/JianCha/JianChaClose";
 import SelectPeople from "./src/ServerCenter/JianCha/SelectPeople";
 import ZhuHuList from "./src/ServerCenter/ZhuHu/ZhuHuList";
+import AllPaiGong from "./src/DeviceManage/DevicePaiGong/AllPaiGong";
+import WeiPaiGong from "./src/DeviceManage/DevicePaiGong/WeiPaiGong";
+import YiPaiGong from "./src/DeviceManage/DevicePaiGong/YiPaiGong";
+import PaiGongDetail from "./src/DeviceManage/DevicePaiGong/PaiGongDetail";
+import PaiGongZhuanPai from "./src/DeviceManage/DevicePaiGong/PaiGongZhuanPai";
+import PaiGongSelectPeople from "./src/DeviceManage/DevicePaiGong/PaiGongSelectPeople";
+import WeiWeiXiu from "./src/DeviceManage/DeviceWeiXiu/WeiWeiXiu";
+import WeiXiuZhong from "./src/DeviceManage/DeviceWeiXiu/WeiXiuZhong";
+import WeiXiuDengJi from "./src/DeviceManage/DeviceWeiXiu/WeiXiuDengJi";
+import ShuiBiaoList from "./src/DeviceManage/ShuiBiao/ShuiBiaoList";
+import ShuiBiaoDetail from "./src/DeviceManage/ShuiBiao/ShuiBiaoDetail";
+import DianBiaoList from "./src/DeviceManage/DianBiao/DianBiaoList";
+import DianBiaoDetail from "./src/DeviceManage/DianBiao/DianBiaoDetail";
+import CustomerList from "./src/ZhaoShangService/Customer/CustomerList";
+import CustomerAdd from "./src/ZhaoShangService/Customer/CustomerAdd";
+import CustomerDetail from "./src/ZhaoShangService/Customer/CustomerDetail";
+import ResourceDetail from "./src/ZhaoShangService/Resource/ResourceDetail";
+import ResourceList from "./src/ZhaoShangService/Resource/ResourceList";
+import XunJianList from "./src/DeviceManage/DeviceXunJian/XunJianList";
+import XuanJianDetail from "./src/DeviceManage/DeviceXunJian/XuanJianDetail";
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -71,11 +93,11 @@ const Tab = TabNavigator({
 
         },
     },
-    Demo2: {
-        screen: Demo2,
+    Missions: {
+        screen: Missions,
         navigationOptions: {
             //stackNavigator的属性
-            headerTitle: '分类',
+            headerTitle: '我的任务',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
             headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
@@ -90,7 +112,7 @@ const Tab = TabNavigator({
             headerRight:<View/>,
             headerLeft:<View/>,
             //tab 的属性
-            tabBarLabel: '分类',
+            tabBarLabel: '任务',
             tabBarIcon: ({tintColor}) => (
                 <Image
                     source={require('./image/ic_type.png')}
@@ -253,15 +275,14 @@ const Tab2 = TabNavigator({
             inactiveTintColor: 'gray',//label和icon的前景色 活跃状态下（未选中）
             style: { //TabNavigator 的背景颜色
             backgroundColor: 'white',
-                height: 55,
+                height: 40,
         },
         indicatorStyle: {//标签指示器的样式对象（选项卡底部的行）。安卓底部会多出一条线，可以将height设置为0来暂时解决这个问题
             height: 0,
         },
         labelStyle: {//文字的样式
-            fontSize: 13,
-                marginTop: -5,
-                marginBottom: 5,
+            fontSize: 15,
+            marginTop: -20,
         },
     }});
 
@@ -334,15 +355,189 @@ const Tab3 = TabNavigator({
         inactiveTintColor: 'gray',//label和icon的前景色 活跃状态下（未选中）
         style: { //TabNavigator 的背景颜色
             backgroundColor: 'white',
-            height: 55,
+            height: 40,
         },
         indicatorStyle: {//标签指示器的样式对象（选项卡底部的行）。安卓底部会多出一条线，可以将height设置为0来暂时解决这个问题
             height: 0,
         },
         labelStyle: {//文字的样式
-            fontSize: 13,
-            marginTop: -5,
-            marginBottom: 5,
+            fontSize: 15,
+            marginTop: -20,
+        },
+    }});
+
+const Tab4 = TabNavigator({
+    AllPaiGong:{
+        screen: AllPaiGong,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '设备维修派工',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+            //tab 的属性
+            tabBarLabel: '全部'
+        }
+    },
+    WeiPaiGong:{
+        screen: WeiPaiGong,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '设备维修派工',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+            //tab 的属性
+            tabBarLabel: '待派工'
+        }
+    },
+    YiPaiGong:{
+        screen: YiPaiGong,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '设备维修派工',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+            //tab 的属性
+            tabBarLabel: '已派工'
+        }
+    }
+},{
+    //设置TabNavigator的位置
+    tabBarPosition: 'top',
+    //是否在更改标签时显示动画
+    animationEnabled: true,
+    //是否允许在标签之间进行滑动
+    swipeEnabled: true,
+    //按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
+    backBehavior: "none",
+    //设置Tab标签的属性
+
+    tabBarOptions: {
+        //Android属性
+        upperCaseLabel: false,//是否使标签大写，默认为true
+        //共有属性
+        showIcon: true,//是否显示图标，默认关闭
+        showLabel: true,//是否显示label，默认开启
+        activeTintColor: '#4083FF',//label和icon的前景色 活跃状态下（选中）
+        inactiveTintColor: 'gray',//label和icon的前景色 活跃状态下（未选中）
+        style: { //TabNavigator 的背景颜色
+            backgroundColor: 'white',
+            height: 40,
+        },
+        indicatorStyle: {//标签指示器的样式对象（选项卡底部的行）。安卓底部会多出一条线，可以将height设置为0来暂时解决这个问题
+            height: 0,
+        },
+        labelStyle: {//文字的样式
+            fontSize: 15,
+            marginTop: -20,
+        },
+    }});
+const WeiXiuTab = TabNavigator({
+    WeiWeiXiu:{
+        screen: WeiWeiXiu,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '待处理',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+            //tab 的属性
+            tabBarLabel: '待处理'
+        }
+    },
+    WeiXiuZhong:{
+        screen: WeiXiuZhong,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '处理中',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+            //tab 的属性
+            tabBarLabel: '处理中'
+        }
+    }
+},{
+    //设置TabNavigator的位置
+    tabBarPosition: 'top',
+    //是否在更改标签时显示动画
+    animationEnabled: true,
+    //是否允许在标签之间进行滑动
+    swipeEnabled: true,
+    //按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
+    backBehavior: "none",
+    //设置Tab标签的属性
+
+    tabBarOptions: {
+        //Android属性
+        upperCaseLabel: false,//是否使标签大写，默认为true
+        //共有属性
+        showIcon: true,//是否显示图标，默认关闭
+        showLabel: true,//是否显示label，默认开启
+        activeTintColor: '#4083FF',//label和icon的前景色 活跃状态下（选中）
+        inactiveTintColor: 'gray',//label和icon的前景色 活跃状态下（未选中）
+        style: { //TabNavigator 的背景颜色
+            backgroundColor: 'white',
+            height: 40,
+        },
+        indicatorStyle: {//标签指示器的样式对象（选项卡底部的行）。安卓底部会多出一条线，可以将height设置为0来暂时解决这个问题
+            height: 0,
+        },
+        labelStyle: {//文字的样式
+            fontSize: 15,
+            marginTop: -20,
         },
     }});
 
@@ -496,11 +691,59 @@ export default Navi = StackNavigator({
     ZhuHuList: {
         screen: ZhuHuList,
     },
+    PaiGongZhuanPai: {
+        screen: PaiGongZhuanPai,
+    },
+    PaiGongSelectPeople: {
+        screen: PaiGongSelectPeople,
+    },
+    PaiGongDetail: {
+        screen: PaiGongDetail,
+    },
     JianChaDian: {
         screen: JianChaDian,
     },
+    WeiXiuDengJi: {
+        screen: WeiXiuDengJi,
+    },
+    ShuiBiaoList: {
+        screen: ShuiBiaoList,
+    },
+    ShuiBiaoDetail: {
+        screen: ShuiBiaoDetail,
+    },
+    DianBiaoList: {
+        screen: DianBiaoList,
+    },
+    DianBiaoDetail: {
+        screen: DianBiaoDetail,
+    },
+    CustomerList: {
+        screen: CustomerList,
+    },
+    CustomerAdd: {
+        screen: CustomerAdd,
+    },
+    CustomerDetail: {
+        screen: CustomerDetail,
+    },
+    ResourceDetail: {
+        screen: ResourceDetail,
+    },
+    ResourceList: {
+        screen: ResourceList,
+    },
+    XuanJianDetail: {
+        screen: XuanJianDetail,
+    },
+    XunJianList: {
+        screen: XunJianList,
+    },
     CheckList: {
         screen: CheckList,
+    },
+    BarcodeTest: {
+        screen: BarcodeTest,
     },
     ZhuHu: {
         screen: ZhuHu,
@@ -530,9 +773,15 @@ export default Navi = StackNavigator({
     },
     Tab3:{
         screen:Tab3
+    },
+    Tab4:{
+        screen:Tab4
+    },
+    WeiXiuTab:{
+        screen:WeiXiuTab
     }
 },{
-    initialRouteName:'LoginView',
+    initialRouteName:'Tab',
 });
 
 

@@ -66,6 +66,7 @@ export default class JianChaAdd extends Component {
 
     render() {
         return (
+            <View style={{flex:1}}>
             <ScrollView style={{flex:1}}>
                 <View style={styles.container}>
                         <TextInput placeholder="请填写说明" underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656'}} multiline={true}/>
@@ -97,6 +98,7 @@ export default class JianChaAdd extends Component {
                 <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
                     <Text style={styles.loginText}>提交</Text>
                 </TouchableOpacity>
+            </ScrollView>
                 <AwesomeAlert
                     show={this.state.alertInfo.showAlert}
                     showProgress={false}
@@ -116,8 +118,7 @@ export default class JianChaAdd extends Component {
                         this.hideAlert();
                     }}
                 />
-            </ScrollView>
-
+            </View>
         )
     };
     showAlert = () => {
