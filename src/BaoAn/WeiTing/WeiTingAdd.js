@@ -6,10 +6,8 @@ import {
     View,
     ScrollView,
     TextInput,
-    TouchableOpacity,FlatList,Image
+    TouchableOpacity,FlatList,Image,Picker
 } from 'react-native';
-import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
-import DatePicker from 'react-native-datepicker';
 import ImagePicker from 'react-native-image-picker';
 import px2dp from '../../util';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -33,9 +31,9 @@ var photoOptions = {
     }
 }
 var index=0;
-export default class JianChaClose extends Component {
+export default class WeiTingAdd extends Component {
     static navigationOptions = {
-        headerTitle: '特殊情况无法检查说明',
+        headerTitle: '添加违停车辆',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
         headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
@@ -54,8 +52,13 @@ export default class JianChaClose extends Component {
     constructor(props){
         super(props);
         this.state={
+            id:'',
             content:"",
             images:[],
+            timeflag:'1',
+            name:'',
+            date:'',
+            language:'',
             alertInfo:{
                 showAlert:false,
                 title:'温馨提示',
@@ -67,38 +70,56 @@ export default class JianChaClose extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-            <ScrollView style={{flex:1}}>
-                <View style={styles.container}>
-                        <TextInput placeholder="请填写说明" underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656'}} multiline={true}/>
-                        <View style={{alignSelf:'flex-start',flexDirection:'row'}}>
-                            <TouchableOpacity onPress={()=>this.openMycamera()} style={{}}>
-                                <View style={{width:70,height:70,alignContent:'center',alignSelf:'center',justifyContent:'center',backgroundColor:'white',borderRadius:5,borderStyle:'solid',borderWidth:1,borderColor:'#c9c9c9'}}>
-                                    <Image style={{width:40,height:40,alignSelf:'center',justifyContent:'center'}} source={require('../../../image/add.png')}/>
-                                </View>
-                            </TouchableOpacity>
-
-                            { this.state.images.length ==0 ? null :
-                                <FlatList
-                                    horizontal={true}
-                                    data={this.state.images}
-                                    extraData={this.state}
-                                    renderItem={({item}) =>
-                                        <View style={{width:70,height:70,marginLeft:10,position:'relative',flexDirection:'row'}}>
-                                            <Image style={{width:70,height:70}} source={item} />
-                                            <TouchableOpacity onPress={()=>this.deleteImg(item.index)} style={{position:'absolute',top:0,right:0}}>
-                                                <Image style={{width:20,height:20,}} source={require('../../../image/delete.png')}/>
-                                            </TouchableOpacity>
-                                        </View>
-                                    }
-                                />
-                            }
+                <ScrollView style={{flex:1}}>
+                    <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginTop:10}}>
+                        <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14}}>车牌号：</Text>
+                            <TextInput style={{flex:1,fontSize:14,fontColor:'#CECECE'}} placeholder={'请输入车牌号'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({name:text})}/>
                         </View>
-                </View>
+                        <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14}}>车主：</Text>
+                            <TextInput style={{flex:1,fontSize:14,fontColor:'#CECECE'}} placeholder={'请输入名字'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({name:text})}/>
+                        </View>
+                        <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14}}>电话：</Text>
+                            <TextInput style={{flex:1,fontSize:14,fontColor:'#CECECE'}} placeholder={'请输入电话'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({name:text})}/>
+                        </View>
+                    </View>
 
-                <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
-                    <Text style={styles.loginText}>提交</Text>
-                </TouchableOpacity>
-            </ScrollView>
+                    <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginTop:10}}>
+                        <View style={{height:80,justifyContent:'center',flexDirection:'row',alignItems:'flex-start',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14,width:80,paddingTop:15}}>备注：</Text>
+                            <TextInput placeholder="输入具体位置或者标记原因" underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656'}} multiline={true}/>
+                        </View>
+                    </View>
+
+                    <View style={{alignSelf:'flex-start',flexDirection:'row',paddingBottom:10,paddingTop:10}}>
+                        <TouchableOpacity onPress={()=>this.openMycamera()} style={{}}>
+                            <View style={{width:70,height:70,alignContent:'center',alignSelf:'center',justifyContent:'center',backgroundColor:'white',borderRadius:5,borderStyle:'solid',borderWidth:1,borderColor:'#c9c9c9'}}>
+                                <Image style={{width:40,height:40,alignSelf:'center',justifyContent:'center'}} source={require('../../../image/add.png')}/>
+                            </View>
+                        </TouchableOpacity>
+
+                        { this.state.images.length ==0 ? null :
+                            <FlatList
+                                horizontal={true}
+                                data={this.state.images}
+                                extraData={this.state}
+                                renderItem={({item}) =>
+                                    <View style={{width:70,height:70,marginLeft:10,position:'relative',flexDirection:'row'}}>
+                                        <Image style={{width:70,height:70}} source={item} />
+                                        <TouchableOpacity onPress={()=>this.deleteImg(item.index)} style={{position:'absolute',top:0,right:0}}>
+                                            <Image style={{width:20,height:20,}} source={require('../../../image/delete.png')}/>
+                                        </TouchableOpacity>
+                                    </View>
+                                }
+                            />
+                        }
+                    </View>
+                    <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
+                        <Text style={styles.loginText}>标记违停</Text>
+                    </TouchableOpacity>
+                </ScrollView>
                 <AwesomeAlert
                     show={this.state.alertInfo.showAlert}
                     showProgress={false}
@@ -119,8 +140,18 @@ export default class JianChaClose extends Component {
                     }}
                 />
             </View>
+
         )
     };
+    selectPeople=()=>{
+        this.props.navigation.navigate('SelectPeople', {returnData: this.returnData.bind(this)});
+    }
+
+    returnData(id, name) {
+        alert(name);
+        this.setState({id: id, name: name});
+    }
+
     showAlert = () => {
         this.setState({
             alertInfo:{

@@ -18,7 +18,6 @@ import {
     StackNavigator,
 } from 'react-navigation';
 import Demo1 from "./src/Demo1";
-import BarcodeTest  from "./src/BarcodeTest ";
 import LoginView from "./src/loginView";
 import ForgetPwd from "./src/forgetPwd";
 import Mine from "./src/Mine";
@@ -68,6 +67,13 @@ import ResourceDetail from "./src/ZhaoShangService/Resource/ResourceDetail";
 import ResourceList from "./src/ZhaoShangService/Resource/ResourceList";
 import XunJianList from "./src/DeviceManage/DeviceXunJian/XunJianList";
 import XuanJianDetail from "./src/DeviceManage/DeviceXunJian/XuanJianDetail";
+import BarCode from "./src/BarCode";
+import Welcome from "./src/Welcome";
+import ChaYan from "./src/BaoAn/ChaYan/ChaYan";
+import WeiTingList from "./src/BaoAn/WeiTing/WeiTingList";
+import WeiTingAdd from "./src/BaoAn/WeiTing/WeiTingAdd";
+import ShiJianAdd from "./src/BaoAn/ShiJian/ShiJianAdd";
+import ShiJianList from "./src/BaoAn/ShiJian/ShiJianList";
 
 
 const instructions = Platform.select({
@@ -100,7 +106,7 @@ const Tab = TabNavigator({
             headerTitle: '我的任务',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -128,7 +134,7 @@ const Tab = TabNavigator({
             headerTitle: '我的',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -195,7 +201,7 @@ const Tab2 = TabNavigator({
             headerTitle: '处理中',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -217,7 +223,7 @@ const Tab2 = TabNavigator({
             headerTitle: '待评价',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -239,7 +245,7 @@ const Tab2 = TabNavigator({
             headerTitle: '处理完成',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -297,7 +303,7 @@ const Tab3 = TabNavigator({
             headerBackTitleStyle:{
               color:'white'
             },
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -319,7 +325,7 @@ const Tab3 = TabNavigator({
             headerTitle: '处理完成',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -374,7 +380,7 @@ const Tab4 = TabNavigator({
             headerTitle: '设备维修派工',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -396,7 +402,7 @@ const Tab4 = TabNavigator({
             headerTitle: '设备维修派工',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -418,7 +424,7 @@ const Tab4 = TabNavigator({
             headerTitle: '设备维修派工',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -472,7 +478,7 @@ const WeiXiuTab = TabNavigator({
             headerTitle: '待处理',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -494,7 +500,7 @@ const WeiXiuTab = TabNavigator({
             headerTitle: '处理中',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -558,6 +564,12 @@ export default Navi = StackNavigator({
     Demo1: {
         screen: Demo1,
     },
+    Welcome: {
+        screen: Welcome,
+        navigationOptions:{
+            header:null
+        }
+    },
     BaoShi: {
         screen: BaoShi,
         navigationOptions: {
@@ -565,7 +577,7 @@ export default Navi = StackNavigator({
             headerTitle: '报修',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -585,7 +597,7 @@ export default Navi = StackNavigator({
             headerTitle: '欠费催缴',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -605,7 +617,7 @@ export default Navi = StackNavigator({
             headerTitle: '品质整改',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -625,7 +637,7 @@ export default Navi = StackNavigator({
             headerTitle: '整改详情',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -645,7 +657,7 @@ export default Navi = StackNavigator({
             headerTitle: '整改详情',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
@@ -742,8 +754,20 @@ export default Navi = StackNavigator({
     CheckList: {
         screen: CheckList,
     },
-    BarcodeTest: {
-        screen: BarcodeTest,
+    ChaYan: {
+        screen: ChaYan,
+    },
+    WeiTingList: {
+        screen: WeiTingList,
+    },
+    WeiTingAdd: {
+        screen: WeiTingAdd,
+    },
+    ShiJianAdd: {
+        screen: ShiJianAdd,
+    },
+    ShiJianList: {
+        screen: ShiJianList,
     },
     ZhuHu: {
         screen: ZhuHu,
@@ -752,7 +776,27 @@ export default Navi = StackNavigator({
             headerTitle: '住户管理',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 18,
+                //居中显示
+                alignSelf: 'center',
+                textAlign:'center',
+            },
+            headerRight:<View/>,
+            // headerLeft:<View/>,
+        }
+    },
+    BarCode: {
+        screen: BarCode,
+        navigationOptions: {
+            //stackNavigator的属性
+            headerTitle: '住户管理',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小

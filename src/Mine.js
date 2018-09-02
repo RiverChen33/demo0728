@@ -34,7 +34,9 @@ class Mine extends Component {
         return (
             <ScrollView style={styles.container}>
                 <View style={{paddingTop:30,backgroundColor:'white',textAlign:'center'}}>
-                    <Image source={require('../image/logo.png')} style={styles.imgicon}/>
+                    <View style={{width:60,height:60,borderRadius:60,alignSelf:'center'}}>
+                        <Image source={require('../image/logo.png')} style={styles.imgicon}/>
+                    </View>
                         <Text style={{color:'#565656',paddingTop:10,paddingBottom:20,textAlign:'center',fontSize:18}}>Mr.River</Text>
                 </View>
                 <View style={{flexDirection:"row",paddingTop:10,paddingBottom:20,marginBottom:10,backgroundColor:'white'}}>
@@ -94,7 +96,6 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderStyle:'solid',
         borderColor:'#4077F8',
-        borderRadius:5,
         alignSelf:'center'
     },
     loginText: {
@@ -108,7 +109,6 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         textAlign:'center',
         justifyContent:'center',
-        borderRadius:60
     },
     imgicon3:{
         width:30,height:30,
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         textAlign:'center',
         justifyContent:'center',
-        borderRadius:30,
         margin:10,
         marginTop:5,marginBottom:5,
     },

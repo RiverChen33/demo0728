@@ -100,10 +100,10 @@ const styles=StyleSheet.create({
         paddingLeft:10,
         paddingRight:10,
         marginBottom:0,
-        shadowOffset: {width: 0, height: 0},
-        shadowColor: 'black',
-        shadowOpacity: 1,
-        shadowRadius: 5,
+
+
+
+
         backgroundColor:'white',
         borderBottomColor:'#c9c9c9',
         borderBottomWidth:1,

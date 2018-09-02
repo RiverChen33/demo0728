@@ -38,7 +38,7 @@ export default class CustomerAdd extends Component {
         headerTitle: '新增客户',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
-        headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+        headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
         headerTitleStyle: {
             color: 'white',
             //设置标题的大小

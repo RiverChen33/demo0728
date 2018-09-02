@@ -12,7 +12,7 @@ export default class Missions extends Component {
         headerTitle: '我的任务',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
-        headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+        headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
         headerTitleStyle: {
             color: 'white',
             //设置标题的大小
@@ -61,7 +61,7 @@ export default class Missions extends Component {
                     animated={true}
                 />
                 <View style={{flexDirection:'row',flex:1,marginLeft:10,marginRight:10,marginBottom:15,marginTop:15,height:120}}>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('ShuiBiaoList')} style={{flex:1,borderRadius:3,}}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('BarCode')} style={{flex:1,borderRadius:3,}}>
                         <LRFunc source={require('../image/qrcode2.png')} text="扫一扫"></LRFunc>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate('DianBiaoList')} style={{flex:1}}>
@@ -78,7 +78,7 @@ export default class Missions extends Component {
                                 <Text style={{fontSize:16,lineHeight:50,color:'#383838',alignSelf:'center'}}>业主服务</Text>
                             </View>
                             <View style={{flexDirection:'row',height:20,alignItems:'center',width:40,backgroundColor:'#4083FF',borderRadius:8,alignSelf:'center',justifyContent:'center'}}>
-                                <Text style={{fontSize:16,lineHeight:20,color:'#383838',color:'white'}}>11</Text>
+                                <Text style={{fontSize:16,lineHeight:20,color:'white'}}>11</Text>
                             </View>
                         </View>
                         <View style={{width:35,justifyContent:'center'}}>
@@ -91,7 +91,7 @@ export default class Missions extends Component {
                                 <Text style={{fontSize:16,lineHeight:50,color:'#383838',alignSelf:'center'}}>业主服务</Text>
                             </View>
                             <View style={{flexDirection:'row',height:20,alignItems:'center',width:40,backgroundColor:'#4083FF',borderRadius:8,alignSelf:'center',justifyContent:'center'}}>
-                                <Text style={{fontSize:16,lineHeight:20,color:'#383838',color:'white'}}>11</Text>
+                                <Text style={{fontSize:16,lineHeight:20,color:'white'}}>11</Text>
                             </View>
                         </View>
                         <View style={{width:35,justifyContent:'center'}}>
@@ -159,10 +159,6 @@ const styles=StyleSheet.create({
         flex:4,
         paddingLeft:10,
         paddingRight:10,
-        shadowOffset: {width: 0, height: 0},
-        shadowColor: 'black',
-        shadowOpacity: 1,
-        shadowRadius: 5,
         backgroundColor:'white',
         paddingTop:10
     },

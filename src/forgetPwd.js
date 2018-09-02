@@ -41,10 +41,10 @@ export default class ForgetPwd extends Component {
 
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={{position:'absolute',top:15,left:10}} onPress={()=>{this.props.navigation.navigate("LoginView")}}>
+                <TouchableOpacity style={{position:'absolute',top:30,left:10}} onPress={()=>{this.props.navigation.navigate("LoginView")}}>
                     <Image style={{width:20,height:20}} source={require('../image/arrow-left.png')}/>
                 </TouchableOpacity>
-                <View style={{position:'absolute',top:15,textAlign:'center'}}>
+                <View style={{position:'absolute',top:33,textAlign:'center'}}>
                     <Text style={{color:'#333333',fontSize:16,}}>找回密码</Text>
                 </View>
                 {/*头像*/}

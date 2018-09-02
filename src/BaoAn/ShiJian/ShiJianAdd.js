@@ -6,7 +6,7 @@ import {
     View,
     ScrollView,
     TextInput,
-    TouchableOpacity,FlatList,Image
+    TouchableOpacity,FlatList,Image,Picker
 } from 'react-native';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import DatePicker from 'react-native-datepicker';
@@ -33,9 +33,10 @@ var photoOptions = {
     }
 }
 var index=0;
-export default class JianChaClose extends Component {
+export default class ShiJianAdd extends Component {
     static navigationOptions = {
-        headerTitle: '特殊情况无法检查说明',
+        headerTitle: '登记突发事件',
+
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
         headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
@@ -54,8 +55,13 @@ export default class JianChaClose extends Component {
     constructor(props){
         super(props);
         this.state={
+            id:'',
             content:"",
             images:[],
+            timeflag:'1',
+            name:'',
+            date:'',
+            language:'',
             alertInfo:{
                 showAlert:false,
                 title:'温馨提示',
@@ -67,10 +73,10 @@ export default class JianChaClose extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-            <ScrollView style={{flex:1}}>
-                <View style={styles.container}>
-                        <TextInput placeholder="请填写说明" underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656'}} multiline={true}/>
-                        <View style={{alignSelf:'flex-start',flexDirection:'row'}}>
+                <ScrollView style={{flex:1}}>
+                <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginTop:10,paddingTop:10}}>
+                    <Text>处理前</Text>
+                        <View style={{alignSelf:'flex-start',flexDirection:'row',paddingBottom:10,paddingTop:10}}>
                             <TouchableOpacity onPress={()=>this.openMycamera()} style={{}}>
                                 <View style={{width:70,height:70,alignContent:'center',alignSelf:'center',justifyContent:'center',backgroundColor:'white',borderRadius:5,borderStyle:'solid',borderWidth:1,borderColor:'#c9c9c9'}}>
                                     <Image style={{width:40,height:40,alignSelf:'center',justifyContent:'center'}} source={require('../../../image/add.png')}/>
@@ -93,12 +99,51 @@ export default class JianChaClose extends Component {
                                 />
                             }
                         </View>
-                </View>
+                    </View>
 
-                <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
-                    <Text style={styles.loginText}>提交</Text>
-                </TouchableOpacity>
-            </ScrollView>
+                    <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginTop:10}}>
+                        <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14}}>类型：</Text>
+                            <TextInput style={{flex:1,fontSize:14,fontColor:'#CECECE'}} placeholder={'请输入类型'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({name:text})}/>
+                        </View>
+                        <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14}}>时间：</Text>
+                            <TextInput style={{flex:1,fontSize:14,fontColor:'#CECECE'}} placeholder={'请输入时间'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({name:text})}/>
+                        </View>
+                        <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14}}>位置：</Text>
+                            <TextInput style={{flex:1,fontSize:14,fontColor:'#CECECE'}} placeholder={'请输入位置'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({name:text})}/>
+                        </View>
+                        <View style={{height:80,justifyContent:'center',flexDirection:'row',alignItems:'flex-start',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14,paddingTop:15}}>描述：</Text>
+                            <TextInput placeholder="输入具体描述" underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:14,color:'#565656'}} multiline={true}/>
+                        </View>
+                    </View>
+
+                    <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginTop:10}}>
+                        <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14}}>处理情况：</Text>
+                            <RadioGroup  selectedIndex={0}
+                                         onSelect = {(index, value) => this.setState({timeflag:value})} style={{flexDirection:'row',flex:1,justifyContent:'center',alignSelf:'flex-end'}}>
+                                <RadioButton value={'1'} >
+                                    <Text>下一步处理</Text>
+                                </RadioButton>
+                                <RadioButton value={'2'}>
+                                    <Text>处理完成</Text>
+                                </RadioButton>
+                            </RadioGroup>
+                        </View>
+                        <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center',borderColor:'#eee',borderBottomWidth:1,borderStyle:'solid'}}>
+                            <Text style={{color:'#929292',fontSize:14}}>处理人：</Text>
+                            <TextInput style={{flex:1,fontSize:14,fontColor:'#CECECE'}} placeholder={'请输入处理人'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({name:text})}/>
+                        </View>
+                    </View>
+
+
+                    <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
+                        <Text style={styles.loginText}>提交</Text>
+                    </TouchableOpacity>
+                </ScrollView>
                 <AwesomeAlert
                     show={this.state.alertInfo.showAlert}
                     showProgress={false}
@@ -119,8 +164,18 @@ export default class JianChaClose extends Component {
                     }}
                 />
             </View>
+
         )
     };
+    selectPeople=()=>{
+        this.props.navigation.navigate('SelectPeople', {returnData: this.returnData.bind(this)});
+    }
+
+    returnData(id, name) {
+        alert(name);
+        this.setState({id: id, name: name});
+    }
+
     showAlert = () => {
         this.setState({
             alertInfo:{

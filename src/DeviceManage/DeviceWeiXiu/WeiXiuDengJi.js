@@ -38,7 +38,7 @@ export default class WeiXiuDengJi extends Component {
         headerTitle: '设备维修报修',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
-        headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+        headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
         headerTitleStyle: {
             color: 'white',
             //设置标题的大小

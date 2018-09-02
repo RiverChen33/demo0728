@@ -10,7 +10,7 @@ var dimensions = require('Dimensions');
 var {width} = dimensions.get('window');
 export default class XunJianList extends Component {
     static navigationOptions = {
-        headerTitle: '设备巡检',
+        headerTitle: '车辆违停',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
         headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
@@ -53,35 +53,38 @@ export default class XunJianList extends Component {
                     data={this.state.list}
                     extraData={this.state}
                     renderItem={({item}) =>
-                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("XuanJianDetail",{id:item.id})}}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("",{id:item.id})}}>
                             <View style={styles.container}>
                                 <View style={{flex:4}}>
-                                    <View style={{flexDirection:'row',height:30}}>
-                                        <Text style={{fontSize:16,lineHeight:30,fontWeight:'600',}}>{item.class}</Text>
+                                    <View style={{flexDirection:'row',height:30,justifyContent:'space-between'}}>
+                                        <Text style={{fontSize:16,lineHeight:30,fontWeight:'600',color:'#4083FF'}}>{item.class}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30}}>{item.data}</Text>
                                     </View>
                                     <View style={{flexDirection:'row',height:30}}>
-                                        <Text style={{fontSize:14,lineHeight:30}}>{item.class}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30}}>车牌号：{item.class}</Text>
                                     </View>
                                     <View style={{flexDirection:'row',height:30}}>
-                                        <Text style={{fontSize:14,lineHeight:30,color:'#929292'}}>位置：{item.date}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30}}>车主：{item.date}</Text>
+                                    </View>
+                                    <View style={{flexDirection:'row',height:30}}>
+                                        <Text style={{fontSize:14,lineHeight:30,color:'#929292'}}>电话：{item.date}</Text>
                                     </View>
                                 </View>
-                                <View style={{width:65,justifyContent:'center'}}>
-                                    <Image style={{width:16,height:16,alignSelf:'flex-end'}} source={require('../../../image/arrow.png')}/>
-                                </View>
+                                {/*<View style={{width:65,justifyContent:'center'}}>*/}
+                                    {/*<Image style={{width:16,height:16,alignSelf:'flex-end'}} source={require('../../../image/arrow.png')}/>*/}
+                                {/*</View>*/}
                             </View>
                         </TouchableOpacity>
                             }
                 />
             </ScrollView>
-            <View style={{height:40,width:width,justifyContent:'center',flexDirection:"row"}}>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate("XuanJianDetail")} style={{flexDirection:'row',justifyContent:'center',flex:1}}>
-                    <View style={{height:40,justifyContent:'center',backgroundColor:'#4083FF',flex:1,flexDirection:'row'}}>
-                        <Image style={{width:30,height:30,alignSelf:'center',marginRight:10}} source={require('../../../image/qrcode.png')}/>
-                        <Text style={{color:'white',alignSelf:'center'}}>扫码</Text>
-                    </View>
+                <View style={{height:40,width:width,justifyContent:'center',flexDirection:"row"}}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("WeiTingAdd")} style={{flexDirection:'row',justifyContent:'center',flex:1}}>
+                        <View style={{height:40,justifyContent:'center',backgroundColor:'#4083FF',flex:1,flexDirection:'row'}}>
+                            <Text style={{color:'white',alignSelf:'center'}}>添加违停</Text>
+                        </View>
                     </TouchableOpacity>
-            </View>
+                </View>
             </View>
         )
     };

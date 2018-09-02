@@ -12,8 +12,9 @@ export default class Home extends Component {
         headerTitle: '首页',
         gestureResponseDistance: {horizontal: 300},
         headerBackTitle: null,
-        headerStyle: {backgroundColor: '#4083FF',height:50},//导航栏的样式
+        headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
         headerTitleStyle: {
+
             color: 'white',
             //设置标题的大小
             fontSize: 16,
@@ -92,13 +93,13 @@ export default class Home extends Component {
                 <View style={{marginLeft:10,marginBottom:15}}>
                     <Text style={styles.title}>保安</Text>
                     <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('BarcodeTest')} style={{flex:1}}>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('ChaYan')} style={{flex:1}}>
                             <LRFunc2 source={require('../image/ic_home.png')} text="访客查验"></LRFunc2>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('WeiXiuTab')} style={{flex:1}}>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('WeiTingList')} style={{flex:1}}>
                             <LRFunc2 source={require('../image/ic_home.png')} text="车辆违停"></LRFunc2>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('ShiJianList')} style={{flex:1}}>
                             <LRFunc2 source={require('../image/ic_home.png')} text="上报事件"></LRFunc2>
                         </TouchableOpacity>
                     </View>

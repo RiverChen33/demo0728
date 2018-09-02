@@ -22,7 +22,7 @@ var photoOptions = {
     //底部弹出框选项
     title:'请选择',
     cancelButtonTitle:'取消',
-    takePhotoButtonTitle:'拍照',
+    takePhotoButtonTitle:'',
     chooseFromLibraryButtonTitle:'选择相册',
     quality:0.75,
     allowsEditing:true,
