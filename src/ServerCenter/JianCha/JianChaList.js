@@ -11,27 +11,31 @@ var dimensions = require('Dimensions');
 var {width} = dimensions.get('window');
 
 export default class JianChaList extends Component {
-    static navigationOptions =(props)=> {
+    static navigationOptions = (props)=> {
         return {
             headerTitle: '品质检查',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
+            headerStyle: {backgroundColor: '#4083FF', height: 60},//导航栏的样式
             headerTitleStyle: {
                 color: 'white',
                 //设置标题的大小
                 fontSize: 16,
                 //居中显示
                 alignSelf: 'center',
-                textAlign:'center',
+                textAlign: 'center',
             },
-            // headerRight:<TouchableOpacity onPress={()=>props.navigation.navigate("CheckList")}>
-            //     <Text style={{color:'white',paddingRight:10,justifyContent:'center'}}>新增</Text>
-            // </TouchableOpacity>,
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-        };
-    };
+            headerRight: <View/>,
+            headerLeft: <View>
+                <TouchableOpacity onPress={() => {
+                    props.navigation.goBack()
+                }}>
+                    <Image style={{width:25,height:25,marginLeft:10}} source={require('../../../image/back-icon.png')}/>
+                </TouchableOpacity>
+            </View>
+        }
+
+    }
 
     componentWillMount() {                    //通过setParams将increase方法绑定到_increase
     }

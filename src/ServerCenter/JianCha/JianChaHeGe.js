@@ -34,21 +34,31 @@ var photoOptions = {
 }
 var index=0;
 export default class JianChaHeGe extends Component {
-    static navigationOptions = {
-        headerTitle: '合格说明',
-        gestureResponseDistance: {horizontal: 300},
-        headerBackTitle: null,
-        headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-        headerTitleStyle: {
-            color: 'white',
-            //设置标题的大小
-            fontSize: 16,
-            //居中显示
-            alignSelf: 'center',
-            textAlign:'center',
-        },
-        headerRight:<View/>,
-        // headerLeft:<View/>,
+
+    static navigationOptions = (props)=> {
+        return {
+            headerTitle: '合格说明',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF', height: 60},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 16,
+                //居中显示
+                alignSelf: 'center',
+                textAlign: 'center',
+            },
+            headerRight: <View/>,
+            headerLeft: <View>
+                <TouchableOpacity onPress={() => {
+                    props.navigation.goBack()
+                }}>
+                    <Image style={{width:25,height:25,marginLeft:10}} source={require('../../../image/back-icon.png')}/>
+                </TouchableOpacity>
+            </View>
+        }
+
     }
 
     constructor(props){

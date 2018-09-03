@@ -11,6 +11,32 @@ var dimensions = require('Dimensions');
 var {width} = dimensions.get('window');
 
 export default class QianFei extends Component {
+    static navigationOptions = (props)=> {
+        return {
+            headerTitle: '欠费管理',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF', height: 60},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 16,
+                //居中显示
+                alignSelf: 'center',
+                textAlign: 'center',
+            },
+            headerRight: <View/>,
+            headerLeft: <View>
+                <TouchableOpacity onPress={() => {
+                    props.navigation.goBack()
+                }}>
+                    <Image style={{width:25,height:25,marginLeft:10}} source={require('../../image/back-icon.png')}/>
+                </TouchableOpacity>
+            </View>
+        }
+
+    }
+
     constructor(props) {
         super(props);
         this.state = {

@@ -375,69 +375,12 @@ const Tab3 = TabNavigator({
 const Tab4 = TabNavigator({
     AllPaiGong:{
         screen: AllPaiGong,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '设备维修派工',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-            //tab 的属性
-            tabBarLabel: '全部'
-        }
     },
     WeiPaiGong:{
         screen: WeiPaiGong,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '设备维修派工',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-            //tab 的属性
-            tabBarLabel: '待派工'
-        }
     },
     YiPaiGong:{
-        screen: YiPaiGong,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '设备维修派工',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-            //tab 的属性
-            tabBarLabel: '已派工'
-        }
+        screen: YiPaiGong
     }
 },{
     //设置TabNavigator的位置
@@ -473,47 +416,9 @@ const Tab4 = TabNavigator({
 const WeiXiuTab = TabNavigator({
     WeiWeiXiu:{
         screen: WeiWeiXiu,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '待处理',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-            //tab 的属性
-            tabBarLabel: '待处理'
-        }
     },
     WeiXiuZhong:{
         screen: WeiXiuZhong,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '处理中',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-            //tab 的属性
-            tabBarLabel: '处理中'
-        }
     }
 },{
     //设置TabNavigator的位置
@@ -572,103 +477,18 @@ export default Navi = StackNavigator({
     },
     BaoShi: {
         screen: BaoShi,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '报修',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-        }
     },
     QianFei: {
         screen: QianFei,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '欠费催缴',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-        }
     },
     ZhengGai: {
         screen: ZhengGai,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '品质整改',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-        }
     },
     ZhengGaiDetail: {
         screen: ZhengGaiDetail,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '整改详情',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-        }
     },
     ZhengGaiYanShou: {
         screen: ZhengGaiYanShou,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '整改详情',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-        }
     },
     KaoPinKouFen: {
         screen: KaoPinKouFen,
@@ -791,23 +611,6 @@ export default Navi = StackNavigator({
     },
     BarCode: {
         screen: BarCode,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '住户管理',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-        }
     },
     Tab:{
         screen:Tab

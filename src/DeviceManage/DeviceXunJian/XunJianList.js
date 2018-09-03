@@ -9,21 +9,31 @@ var dimensions = require('Dimensions');
 //获取屏幕的宽度
 var {width} = dimensions.get('window');
 export default class XunJianList extends Component {
-    static navigationOptions = {
-        headerTitle: '设备巡检',
-        gestureResponseDistance: {horizontal: 300},
-        headerBackTitle: null,
-        headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-        headerTitleStyle: {
-            color: 'white',
-            //设置标题的大小
-            fontSize: 16,
-            //居中显示
-            alignSelf: 'center',
-            textAlign:'center',
-        },
-        headerRight:<View/>,
-        // headerLeft:<View/>,
+
+    static navigationOptions = (props)=> {
+        return {
+            headerTitle: '设备巡检',
+            gestureResponseDistance: {horizontal: 300},
+            headerBackTitle: null,
+            headerStyle: {backgroundColor: '#4083FF', height: 60},//导航栏的样式
+            headerTitleStyle: {
+                color: 'white',
+                //设置标题的大小
+                fontSize: 16,
+                //居中显示
+                alignSelf: 'center',
+                textAlign: 'center',
+            },
+            headerRight: <View/>,
+            headerLeft: <View>
+                <TouchableOpacity onPress={() => {
+                    props.navigation.goBack()
+                }}>
+                    <Image style={{width:25,height:25,marginLeft:10}} source={require('../../../image/back-icon.png')}/>
+                </TouchableOpacity>
+            </View>
+        }
+
     }
 
     componentWillMount() {                    //通过setParams将increase方法绑定到_increase
