@@ -41,7 +41,7 @@ class Mine extends Component {
                 </View>
                 <View style={{flexDirection:"row",paddingTop:10,paddingBottom:20,marginBottom:10,backgroundColor:'white'}}>
                     <View style={styles.item}>
-                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Tab3")}}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("GDTab")}}>
                             <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
                             <Text>工单记录</Text>
                         </TouchableOpacity>

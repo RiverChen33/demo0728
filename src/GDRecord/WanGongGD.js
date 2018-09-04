@@ -6,11 +6,11 @@ import {
     View,ScrollView,FlatList,Image,StatusBar,TouchableOpacity
 } from 'react-native';
 
-export default class allGD extends Component {
+export default class WanGongGD extends Component {
 
     static navigationOptions = (props)=> {
         return {
-            headerTitle: '全部',
+            headerTitle: '完工',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
             headerStyle: {backgroundColor: '#4083FF', height: 60},//导航栏的样式

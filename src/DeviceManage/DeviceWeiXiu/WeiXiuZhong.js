@@ -87,7 +87,7 @@ export default class WeiXiuZhong extends Component {
                                             </View>
                                         </View>
                                         <View style={{flex:2,justifyContent:'center',alignItems:'flex-end'}}>
-                                            <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaZhengGai")} style={{height:40,alignItems:'center',justifyContent:'center',flex:1,alignItems:'center',backgroundColor:'white'}}>
+                                            <TouchableOpacity onPress={()=>this.props.navigation.navigate("JianChaZhengGai")} style={{height:40,justifyContent:'center',flex:1,alignItems:'center',backgroundColor:'white'}}>
                                                 <Text style={{textAlign:'center',color:'red',height:30,lineHeight:30,width:60,borderRadius:5,borderWidth:1,borderColor:'red',borderStyle:'solid',justifyContent:'center',alignSelf:'center'}}>{item.status}</Text>
                                             </TouchableOpacity>
                                         </View>

@@ -61,7 +61,7 @@ export default class Missions extends Component {
                     animated={true}
                 />
                 <View style={{flexDirection:'row',flex:1,marginLeft:10,marginRight:10,marginBottom:15,marginTop:15,height:120}}>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('BarCode')} style={{flex:1,borderRadius:3,}}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('DefaultScreen')} style={{flex:1,borderRadius:3,}}>
                         <LRFunc source={require('../image/qrcode2.png')} text="扫一扫"></LRFunc>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate('DianBiaoList')} style={{flex:1}}>

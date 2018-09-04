@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#dddddd',
         //设置次轴的对齐方式
         alignItems: 'center',
         backgroundColor:'white'

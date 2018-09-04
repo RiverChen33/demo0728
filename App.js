@@ -27,7 +27,6 @@ import Processing from "./src/service/Processing";
 import BeEvaluted from "./src/service/BeEvaluted";
 import Finish from "./src/service/Finish";
 import allGD from "./src/GDRecord/allGD";
-import allGD1 from "./src/GDRecord/allGD1";
 import BaoShi from "./src/ServerCenter/BaoShi";
 import QianFei from "./src/ServerCenter/QianFei";
 import ZhengGai from "./src/ServerCenter/ZhengGai/ZhengGai";
@@ -67,13 +66,16 @@ import ResourceDetail from "./src/ZhaoShangService/Resource/ResourceDetail";
 import ResourceList from "./src/ZhaoShangService/Resource/ResourceList";
 import XunJianList from "./src/DeviceManage/DeviceXunJian/XunJianList";
 import XuanJianDetail from "./src/DeviceManage/DeviceXunJian/XuanJianDetail";
-import BarCode from "./src/BarCode";
+import DefaultScreen from "./src/DefaultScreen";
 import Welcome from "./src/Welcome";
 import ChaYan from "./src/BaoAn/ChaYan/ChaYan";
 import WeiTingList from "./src/BaoAn/WeiTing/WeiTingList";
 import WeiTingAdd from "./src/BaoAn/WeiTing/WeiTingAdd";
 import ShiJianAdd from "./src/BaoAn/ShiJian/ShiJianAdd";
 import ShiJianList from "./src/BaoAn/ShiJian/ShiJianList";
+import DengJiGD from "./src/GDRecord/DengJiGD";
+import ShouLiGD from "./src/GDRecord/ShouLiGD";
+import WanGongGD from "./src/GDRecord/WanGongGD";
 
 
 const instructions = Platform.select({
@@ -292,86 +294,6 @@ const Tab2 = TabNavigator({
         },
     }});
 
-const Tab3 = TabNavigator({
-    allGD:{
-        screen: allGD,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '全部',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerBackTitleStyle:{
-              color:'white'
-            },
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-            //tab 的属性
-            tabBarLabel: '全部'
-        }
-    },
-    allGD1:{
-        screen: allGD1,
-        navigationOptions: {
-            //stackNavigator的属性
-            headerTitle: '处理完成',
-            gestureResponseDistance: {horizontal: 300},
-            headerBackTitle: null,
-            headerStyle: {backgroundColor: '#4083FF',height:60},//导航栏的样式
-            headerTitleStyle: {
-                color: 'white',
-                //设置标题的大小
-                fontSize: 18,
-                //居中显示
-                alignSelf: 'center',
-                textAlign:'center',
-            },
-            headerRight:<View/>,
-            // headerLeft:<View/>,
-            //tab 的属性
-            tabBarLabel: '处理完成'
-        }
-    },
-},{
-    //设置TabNavigator的位置
-    tabBarPosition: 'top',
-    //是否在更改标签时显示动画
-    animationEnabled: true,
-    //是否允许在标签之间进行滑动
-    swipeEnabled: true,
-    //按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
-    backBehavior: "none",
-    //设置Tab标签的属性
-
-    tabBarOptions: {
-        //Android属性
-        upperCaseLabel: false,//是否使标签大写，默认为true
-        //共有属性
-        showIcon: true,//是否显示图标，默认关闭
-        showLabel: true,//是否显示label，默认开启
-        activeTintColor: '#4083FF',//label和icon的前景色 活跃状态下（选中）
-        inactiveTintColor: 'gray',//label和icon的前景色 活跃状态下（未选中）
-        style: { //TabNavigator 的背景颜色
-            backgroundColor: 'white',
-            height: 40,
-        },
-        indicatorStyle: {//标签指示器的样式对象（选项卡底部的行）。安卓底部会多出一条线，可以将height设置为0来暂时解决这个问题
-            height: 0,
-        },
-        labelStyle: {//文字的样式
-            fontSize: 15,
-            marginTop: -20,
-        },
-    }});
-
 const Tab4 = TabNavigator({
     AllPaiGong:{
         screen: AllPaiGong,
@@ -452,6 +374,50 @@ const WeiXiuTab = TabNavigator({
         },
     }});
 
+const GDTab = TabNavigator({
+    allGD:{
+        screen: allGD,
+    },
+    DengJiGD:{
+        screen: DengJiGD,
+    },
+    ShouLiGD:{
+        screen: ShouLiGD,
+    },
+    WanGongGD:{
+        screen: WanGongGD,
+    }
+},{
+    //设置TabNavigator的位置
+    tabBarPosition: 'top',
+    //是否在更改标签时显示动画
+    animationEnabled: true,
+    //是否允许在标签之间进行滑动
+    swipeEnabled: true,
+    //按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
+    backBehavior: "none",
+    //设置Tab标签的属性
+
+    tabBarOptions: {
+        //Android属性
+        upperCaseLabel: false,//是否使标签大写，默认为true
+        //共有属性
+        showIcon: true,//是否显示图标，默认关闭
+        showLabel: true,//是否显示label，默认开启
+        activeTintColor: '#4083FF',//label和icon的前景色 活跃状态下（选中）
+        inactiveTintColor: 'gray',//label和icon的前景色 活跃状态下（未选中）
+        style: { //TabNavigator 的背景颜色
+            backgroundColor: 'white',
+            height: 40,
+        },
+        indicatorStyle: {//标签指示器的样式对象（选项卡底部的行）。安卓底部会多出一条线，可以将height设置为0来暂时解决这个问题
+            height: 0,
+        },
+        labelStyle: {//文字的样式
+            fontSize: 15,
+            marginTop: -20,
+        },
+    }});
 
 export default Navi = StackNavigator({
     LoginView: {
@@ -609,8 +575,8 @@ export default Navi = StackNavigator({
             // headerLeft:<View/>,
         }
     },
-    BarCode: {
-        screen: BarCode,
+    DefaultScreen: {
+        screen: DefaultScreen,
     },
     Tab:{
         screen:Tab
@@ -618,14 +584,14 @@ export default Navi = StackNavigator({
     Tab2:{
         screen:Tab2
     },
-    Tab3:{
-        screen:Tab3
-    },
     Tab4:{
         screen:Tab4
     },
     WeiXiuTab:{
         screen:WeiXiuTab
+    },
+    GDTab:{
+        screen:GDTab
     }
 },{
     initialRouteName:'Tab',
