@@ -16,7 +16,7 @@ import {
     View
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-
+import FetchUtil from './util/FetchUtil'
 //屏幕信息
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
@@ -29,7 +29,13 @@ export default class ForgetPwd extends Component {
         this.state={
             seconds:10,
             sendText:"发送验证码",
-            sendClass:true
+            sendClass:true,
+            submitInfo:{
+                phone:"",
+                code:"",
+                password:"",
+                confirmPassword:''
+            }
         }
     }
 
@@ -51,27 +57,37 @@ export default class ForgetPwd extends Component {
                 <Image style={styles.circleImage} source={require('../image/logo.png')}/>
                 <Text style={{fontSize:18,marginBottom:49,fontColor:'#4E4E4E'}}>用心服务，美好生活</Text>
                 {/*账户*/}
-                <View style={{borderRadius:5,borderWidth:1,borderColor:'#E6E6E6',borderStyle:'solid',width:width-40,height:150,}}>
+                <View style={{borderRadius:5,borderWidth:1,borderColor:'#E6E6E6',borderStyle:'solid',width:width-40,height:200,}}>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
-                        <TextInput style={{width:width-100,fontSize:14}} placeholder={'请输入手机号'} underlineColorAndroid='transparent'/>
+                        <TextInput style={{width:width-100,fontSize:14}} placeholder={'请输入手机号'} underlineColorAndroid='transparent' onChangeText={(phone)=>{this.setState({submitInfo:{phone:phone}})}}/>
                     </View>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
-                        <TextInput style={{flex:1,fontSize:14}} placeholder={'验证码'} underlineColorAndroid='transparent'/>
+                        <TextInput style={{flex:1,fontSize:14}} placeholder={'验证码'} underlineColorAndroid='transparent' onChangeText={(code)=>{this.setState({submitInfo:{code:code}})}}/>
                         <TouchableOpacity style={this.state.sendClass?styles.btnStyle1:styles.btnStyle2} onPress={this.send.bind(this)}>
                             <Text style={styles.loginText}>{this.state.sendText}</Text>
                         </TouchableOpacity>
                     </View>
+                    <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',borderBottomWidth:1,borderBottomColor:'#E6E6E6',borderBottomStyle:'solid'}}>
+                        <TextInput style={{width:width-100,fontSize:14}} placeholder={'请输入重置密码'} secureTextEntry={true} underlineColorAndroid='transparent' onChangeText={(password)=>{this.setState({submitInfo:{password:password}})}}/>
+                    </View>
                     <View style={{flexDirection:'row',alignContent:'center',paddingLeft:10,height:50,position:'relative',}}>
-                        <TextInput style={{width:width-100,fontSize:14}} placeholder={'请重置密码'} underlineColorAndroid='transparent'/>
+                        <TextInput style={{width:width-100,fontSize:14}} placeholder={'请再次输入重置密码'} secureTextEntry={true} underlineColorAndroid='transparent' onChangeText={(confirmPassword)=>{this.setState({submitInfo:{confirmPassword:confirmPassword}})}}/>
                     </View>
                 </View>
                 {/*登录*/}
-                <TouchableOpacity style={styles.btnStyle} onPress={()=>{this.props.navigation.navigate("Tab")}}>
+                <TouchableOpacity style={styles.btnStyle} onPress={()=>{this.submit()}}>
                     <Text style={styles.loginText}>提交</Text>
                 </TouchableOpacity>
             </View>
         );
     }
+    submit=()=>{
+        FetchUtil.get("http://school.quspacedragon.cn/user/findPwd",this.state.submitInfo,(res)=>{
+            alert(res);
+        })
+    }
+
+
     send(){
         if(this.state.sendClass) {
             var that = this;

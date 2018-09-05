@@ -10,12 +10,11 @@ class DeviceStorage {
      */
 
     static get(key) {
-        return AsyncStorage.getItem(key).then((value) => {
+        return AsyncStorage.getItem(key,((err,value) => {
             const jsonValue = JSON.parse(value);
             return jsonValue;
-        });
+        }));
     }
-
 
     /**
      * 保存

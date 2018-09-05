@@ -3,7 +3,6 @@ package com.demo0728;
 import android.app.Application;
 
 import com.imagepicker.ImagePickerPackage;
-import com.reactnativecomponent.barcode.RCTCapturePackage;
 import com.facebook.react.ReactApplication;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -29,8 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RCTCameraPackage(),
             new VectorIconsPackage(),
-          new ImagePickerPackage(),
-          new RCTCapturePackage()
+          new ImagePickerPackage()
       );
     }
 

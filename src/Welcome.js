@@ -40,7 +40,7 @@ export default class Welcome extends Component {
         }
     componentDidMount() {
             this.Timer();
-           this.Login();
+           this.checkLogin();
     }
 
     componentWillUnmount(){
@@ -79,16 +79,21 @@ export default class Welcome extends Component {
         },1000)
     }
 
-    Login=()=>{
+    checkLogin=()=>{
         var that=this;
-        let token=Storage.get('apptoken');
+        Storage.get('apptoken').then(token=>{
+            token=JSON.parse(token);
+            alert(token);
+console.log(token);
+            let isLogin=false;
 
-        let isLogin=true;
-
-        this.setState({
-            token:token,
-            isLogin:isLogin
+            this.setState({
+                token:token,
+                isLogin:isLogin
+            });
         });
+
+
 
         // FetchUtil.get("http://school.quspacedragon.cn/user/login",that.state,function(res){
         //     //alert(response.data);
@@ -119,7 +124,6 @@ export default class Welcome extends Component {
 
         return (
             <View style={styles.container}>
-                {/*头像*/}
                 <Image style={styles.circleImage} source={require('../image/logo.png')}/>
                 <Text style={{fontSize:px2dp(18),marginBottom:49,fontColor:'#4E4E4E'}}>用心服务，美好生活</Text>
                 <View style={{position:'absolute',top:50,right:20,width:60,height:30,backgroundColor:'#eaeaea',justifyContent:'center',textAlign: 'center'}}>

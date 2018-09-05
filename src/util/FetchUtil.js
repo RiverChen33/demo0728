@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Storage from './DeviceStorage';
 
 export default class FetchUtil extends Component {
     /*
@@ -8,22 +9,26 @@ export default class FetchUtil extends Component {
      *  callback:回调函数
      * */
     static postJSON(url,params,callback){
-        //fetch请求
-        fetch(url,{
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify(params)
-        })
-            .then((response) => response.json())
-            .then((responseJSON) => {
-                callback(responseJSON)
+
+        let token=Storage.get("apptoken").then((token)=>{
+            params.token=JSON.parse(token);
+            //fetch请求
+            fetch(url,{
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify(params)
             })
-            .catch((error) => {
-                console.log("error = " + error)
-            });
+                .then((response) => response.json())
+                .then((responseJSON) => {
+                    callback(responseJSON)
+                })
+                .catch((error) => {
+                    console.log("error = " + error)
+                });
+        });
     }
 
     /*
@@ -66,6 +71,14 @@ export default class FetchUtil extends Component {
                 url += '&' + paramsArray.join('&')
             }
         }
+        let token=Storage.get("apptoken");
+
+        if (url.search(/\?/) === -1) {
+            url += '?token=' + token;
+        } else {
+            url += '&token=' + token;
+        }
+
         //fetch请求
         fetch(url,{
             method: 'GET',
