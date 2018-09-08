@@ -47,7 +47,7 @@ class Mine extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.item}>
-                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Tab2")}}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Atention")}}>
                             <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
                             <Text>评价</Text>
                         </TouchableOpacity>
@@ -59,7 +59,7 @@ class Mine extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.item}>
-                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Tab2")}}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Atention")}}>
                             <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
                             <Text>钥匙</Text>
                         </TouchableOpacity>

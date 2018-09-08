@@ -64,7 +64,7 @@ export default class Missions extends Component {
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate('DefaultScreen')} style={{flex:1,borderRadius:3,}}>
                         <LRFunc source={require('../image/qrcode2.png')} text="扫一扫"></LRFunc>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('DianBiaoList')} style={{flex:1}}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('Atention')} style={{flex:1}}>
                         <LRFunc source={require('../image/opendoor.png')} text="一键开门"></LRFunc>
                     </TouchableOpacity>
                 </View>

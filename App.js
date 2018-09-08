@@ -76,6 +76,7 @@ import ShiJianList from "./src/BaoAn/ShiJian/ShiJianList";
 import DengJiGD from "./src/GDRecord/DengJiGD";
 import ShouLiGD from "./src/GDRecord/ShouLiGD";
 import WanGongGD from "./src/GDRecord/WanGongGD";
+import Atention from "./src/Atention";
 
 
 const instructions = Platform.select({
@@ -554,6 +555,9 @@ export default Navi = StackNavigator({
     },
     ShiJianList: {
         screen: ShiJianList,
+    },
+    Atention: {
+        screen: Atention,
     },
     ZhuHu: {
         screen: ZhuHu,
