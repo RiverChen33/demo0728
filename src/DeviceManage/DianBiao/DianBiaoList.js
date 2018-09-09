@@ -103,7 +103,7 @@ export default class DianBiaoList extends Component {
                         onRefresh={() => this._onRefresh()}
                         refreshing={this.state.isRefresh}
                         renderItem={({item,index}) =>
-                            <TouchableOpacity onPress={()=>{this.props.navigation.navigate("ShuiBiaoRoomList",{id:item.id});}}>
+                            <TouchableOpacity onPress={()=>{this.props.navigation.navigate("DianBiaoRoomList",{id:item.id});}}>
                                 <View style={styles.container}>
                                     <View style={{flex:5}}>
                                         <View style={{flexDirection:'row',height:40}}>

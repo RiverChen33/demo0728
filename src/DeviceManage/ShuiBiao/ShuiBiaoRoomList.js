@@ -88,6 +88,7 @@ export default class ShuiBiaoRoomList extends Component {
                 </View>
                 <View style={{flex:1,position:'relative',marginTop:10}}>
                     <FlatList
+                        style={{flex:1,position:'relative'}}
                         // 空布局
                         ListEmptyComponent={this._createEmptyView}
                         //添加头尾布局
@@ -98,6 +99,8 @@ export default class ShuiBiaoRoomList extends Component {
                         onEndReachedThreshold={0.1}
                         extraData={this.state}
                         data={this.state.list}
+                        onRefresh={() => this._onRefresh()}
+                        refreshing={this.state.isRefresh}
                         renderItem={({item,index}) =>
                         <TouchableOpacity onPress={()=>{this.props.navigation.navigate("ShuiBiaoDetail",{buildingId:this.state.id,roomId:item.id});}}>
                             <View style={styles.container}>
