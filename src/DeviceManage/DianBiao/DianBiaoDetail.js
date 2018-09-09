@@ -47,7 +47,7 @@ export default class DianBiaoDetail extends Component {
 
     componentDidMount(){
         let that=this;
-        FetchUtil.postForm(AppJson.url+"/app/meterRecord/v1/detail",{roomId:this.state.roomId,type:1},(responseJSON)=>{
+        FetchUtil.postForm(AppJson.url+"/app/meterRecord/v1/detail",{roomId:this.state.roomId,type:2},(responseJSON)=>{
             if(responseJSON.code==200){//成功
                 that.setState({detail:responseJSON.data});
             }else if(responseJSON.code==204001||responseJSON.code==204002){
@@ -129,7 +129,7 @@ export default class DianBiaoDetail extends Component {
             }
         }
 
-        FetchUtil.postJSON(AppJson.url+"/app/meterRecord/v1/save",{roomId:this.state.roomId,type:1,num:this.state.num},(responseJSON)=>{
+        FetchUtil.postJSON(AppJson.url+"/app/meterRecord/v1/save",{roomId:this.state.roomId,type:2,num:this.state.num},(responseJSON)=>{
             if(responseJSON.code==200){//成功
                 that.refs.toast.show("提交成功");
                 setTimeout(()=>{
