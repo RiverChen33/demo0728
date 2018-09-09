@@ -9,6 +9,10 @@ import {
 } from 'react-native';
 import px2dp from '../../util';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import AppJson from "../../../app.json"
+import Toast from 'react-native-easy-toast';
+import { NavigationActions } from 'react-navigation';
+import FetchUtil from "../../util/FetchUtil";
 
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
@@ -41,14 +45,32 @@ export default class ShuiBiaoDetail extends Component {
 
     }
 
+    componentDidMount(){
+        let that=this;
+        FetchUtil.postForm(AppJson.url+"/app/meterRecord/v1/detail",{roomId:this.state.roomId,type:2},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.setState({detail:responseJSON.data});
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
+            }
+        })
+    }
+
     constructor(props) {
         super(props);
         this.state = {
-            detail: {id: '201', class: '楼内楼梯扶手、栏杆、窗台',desc:'问题', date: '2018-01-05', status: '整改中',
-                list:[{status:'提出更改',desc:'问题',time:'2018-05-02'},
-                    {status:'通知验收',desc:'问题',time:'2018-05-03'}],
-            images:[]
-            },
+            roomId:this.props.navigation.state.params.roomId,
+            buildingId:this.props.navigation.state.params.buildingId,
+            detail: {},
+            num:0,
             alertInfo:{
                 showAlert:false,
                 title:'温馨提示',
@@ -58,26 +80,27 @@ export default class ShuiBiaoDetail extends Component {
     }
 
     render() {
-        // alert(this.props.navigation.state.params.id);
         return (
             <View style={{flex:1}}>
             <ScrollView style={{flex:1}}>
                 <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginBottom:10}}>
                     <View style={{height:40,justifyContent:'center'}}>
-                        <Text style={{fontSize:16,fontWeight:'600'}}>检查点：{this.state.detail.class}</Text>
+                        <Text style={{fontSize:16,fontWeight:'600'}}>{this.state.detail.roomName}</Text>
                     </View>
                     <View style={{height:40,justifyContent:'center',}}>
-                        <Text style={{color:'#929292',fontSize:14}}>专业：{this.state.detail.desc}</Text>
+                        <Text style={{color:'#929292',fontSize:14}}>{this.state.detail.desc}</Text>
                     </View>
                     <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14}}>
-                        <Text style={{color:'#929292',fontSize:14}}>上次读数：{this.state.detail.date}</Text>
+                        <Text style={{color:'#929292',fontSize:14}}>上次读数：{this.state.detail.lastNum}</Text>
                     </View>
-
+                    <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14}}>
+                        <Text style={{color:'#929292',fontSize:14}}>本次读数：{this.state.detail.nowNum}</Text>
+                    </View>
                 </View>
                 <View style={{backgroundColor:'white',paddingRight:10,paddingLeft:10,marginBottom:10}}>
                     <View style={{height:40,justifyContent:'center',color:'#929292',fontSize:14,flexDirection:'row',alignItems:'center'}}>
-                        <Text style={{color:'#929292',fontSize:14}}>本次读数：</Text>
-                        <TextInput style={{alignSelf:'center',height:40,flex:1,fontSize:px2dp(12),fontColor:'#CECECE'}} placeholder={'请输入本次读数'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({phone:text})}/>
+                        <Text style={{color:'#929292',fontSize:14}}>抄表读数：</Text>
+                        <TextInput style={{alignSelf:'center',height:40,flex:1,fontSize:px2dp(12),fontColor:'#CECECE'}} placeholder={'请输入抄表读数'} underlineColorAndroid='transparent' onChangeText={(text)=>this.setState({num:text})}/>
                     </View>
                 </View>
                 <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
@@ -104,21 +127,45 @@ export default class ShuiBiaoDetail extends Component {
                         this.hideAlert();
                     }}
                 />
+                <Toast ref="toast" opacity={0.8}
+                       position='top'
+                       positionValue={300}
+                       fadeInDuration={750}
+                       fadeOutDuration={2000}/>
             </View>
         )
     };
     Submit(){
-        var that=this;
-        this.setState({
-            alertInfo:{
-                showAlert:true,
-                title:'温馨提示',
-                message:'提交成功'
+        let that=this;
+
+        if(!!!this.state.num){
+            that.refs.toast.show("抄表读数不能为空");
+            return;
+        }else{
+            if(+this.state.num<=0){
+                that.refs.toast.show("抄表读数应大于0");
+                return;
+            }
+        }
+
+        FetchUtil.postJSON(AppJson.url+"/app/meterRecord/v1/save",{roomId:this.state.roomId,type:2,num:this.state.num},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.refs.toast.show("提交成功");
+                setTimeout(()=>{
+                    that.props.navigation.goBack();
+                },1500);
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
             }
         })
-        setTimeout(()=>{
-            that.props.navigation.navigate("Home");
-        },2000);
     }
 
     showAlert = () => {

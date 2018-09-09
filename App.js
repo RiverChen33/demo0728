@@ -77,6 +77,8 @@ import DengJiGD from "./src/GDRecord/DengJiGD";
 import ShouLiGD from "./src/GDRecord/ShouLiGD";
 import WanGongGD from "./src/GDRecord/WanGongGD";
 import Atention from "./src/Atention";
+import ShuiBiaoRoomList from "./src/DeviceManage/ShuiBiao/ShuiBiaoRoomList";
+import DianBiaoRoomList from "./src/DeviceManage/DianBiao/DianBiaoRoomList";
 
 
 const instructions = Platform.select({
@@ -511,11 +513,17 @@ export default Navi = StackNavigator({
     ShuiBiaoDetail: {
         screen: ShuiBiaoDetail,
     },
+    ShuiBiaoRoomList: {
+        screen: ShuiBiaoRoomList,
+    },
     DianBiaoList: {
         screen: DianBiaoList,
     },
     DianBiaoDetail: {
         screen: DianBiaoDetail,
+    },
+    DianBiaoRoomList: {
+        screen: DianBiaoRoomList,
     },
     CustomerList: {
         screen: CustomerList,

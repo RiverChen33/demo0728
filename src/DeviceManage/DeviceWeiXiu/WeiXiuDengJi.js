@@ -192,7 +192,6 @@ export default class WeiXiuDengJi extends Component {
     }
 
     returnData(id, name) {
-        alert(name);
         this.setState({id: id, name: name});
     }
 

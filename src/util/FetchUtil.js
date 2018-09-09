@@ -9,17 +9,15 @@ export default class FetchUtil extends Component {
      *  callback:回调函数
      * */
     static postJSON(url,params,callback){
-
         let token=Storage.get("apptoken").then((token)=>{
-            params.token=JSON.parse(token);
-            //fetch请求
-            fetch(url,{
+
+            fetch(url+"?token="+JSON.parse(token),{
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body:JSON.stringify(params)
+                 body:JSON.stringify(params)
             })
                 .then((response) => response.json())
                 .then((responseJSON) => {
@@ -38,22 +36,60 @@ export default class FetchUtil extends Component {
      *  callback:回调函数
      * */
     static postForm(url,params,callback){
-        //fetch请求
-        fetch(url,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: params
-        })
-            .then((response) => response.json())
-            .then((responseJSON) => {
-                callback(responseJSON)
+        let fd = new FormData();
+        for(let i in params){
+          fd.append(""+i,""+params[i]);
+        }
+
+        let token=Storage.get("apptoken").then((token)=> {
+            //fetch请求
+            fetch(url+"?token="+JSON.parse(token), {
+                method: 'POST',
+                headers: {
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: fd
             })
-            .catch((error) => {
-                console.log("error = " + error)
-            });
+                .then((response) => response.json())
+                .then((responseJSON) => {
+                    callback(responseJSON)
+                })
+                .catch((error) => {
+                    console.log("error = " + error)
+                });
+        })
     }
+    /*
+     *  post请求
+     *  url:请求地址
+     *  params:参数,这里的参数要用这种格式：'key1=value1&key2=value2'
+     *  callback:回调函数
+     * */
+    static postForm1(url,name,params,callback){
+        let fd = new FormData();
+        for(let i in params){
+            fd.append(""+i,""+params[i]);
+        }
+
+        let token=Storage.get("apptoken").then((token)=> {
+            //fetch请求
+            fetch(url+"?token="+JSON.parse(token), {
+                method: 'POST',
+                headers: {
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: fd
+            })
+                .then((response) => response.json())
+                .then((responseJSON) => {
+                    callback(responseJSON)
+                })
+                .catch((error) => {
+                    console.log("error = " + error)
+                });
+        })
+    }
+
     /*
      *  get请求
      *  url:请求地址

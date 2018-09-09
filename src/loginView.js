@@ -75,15 +75,6 @@ export default class LoginView extends Component {
             //that.refs.toast.show('hello world!');
             if(res.success){
                 Storage.save('apptoken',res.data.token);
-
-                let s;
-                let t=Storage.get('apptoken');
-
-
-                t.then((value)=>{s=JSON.parse(value);alert(s)});
-
-                //that.props.navigation.navigate("Tab");
-
                let resetAction = NavigationActions.reset({
                     index: 0,
                     actions: [

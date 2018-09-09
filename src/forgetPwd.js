@@ -83,7 +83,7 @@ export default class ForgetPwd extends Component {
     }
     submit=()=>{
         FetchUtil.get("http://school.quspacedragon.cn/user/findPwd",this.state.submitInfo,(res)=>{
-            alert(res);
+
         })
     }
 
