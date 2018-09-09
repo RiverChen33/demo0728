@@ -71,11 +71,6 @@ export default class DianBiaoDetail extends Component {
             buildingId:this.props.navigation.state.params.buildingId,
             detail: {},
             num:0,
-            alertInfo:{
-                showAlert:false,
-                title:'温馨提示',
-                message:'提交成功'
-            }
         }
     }
 
@@ -148,22 +143,6 @@ export default class DianBiaoDetail extends Component {
             }
         })
     }
-
-    showAlert = () => {
-        this.setState({
-            alertInfo:{
-                showAlert:true
-            }
-        });
-    };
-
-    hideAlert = () => {
-        this.setState({
-            alertInfo:{
-                showAlert:false
-            }
-        });
-    };
 }
 
 const styles=StyleSheet.create({

@@ -71,11 +71,6 @@ export default class ShuiBiaoDetail extends Component {
             buildingId:this.props.navigation.state.params.buildingId,
             detail: {},
             num:0,
-            alertInfo:{
-                showAlert:false,
-                title:'温馨提示',
-                message:'提交成功'
-            }
         }
     }
 
@@ -108,25 +103,6 @@ export default class ShuiBiaoDetail extends Component {
                 </TouchableOpacity>
 
             </ScrollView>
-                <AwesomeAlert
-                    show={this.state.alertInfo.showAlert}
-                    showProgress={false}
-                    title={this.state.alertInfo.title}
-                    message={this.state.alertInfo.message}
-                    closeOnTouchOutside={true}
-                    closeOnHardwareBackPress={false}
-                    showCancelButton={false}
-                    showConfirmButton={true}
-                    cancelText="取消"
-                    confirmText="确定"
-                    confirmButtonColor="#4083FF"
-                    onCancelPressed={() => {
-                        this.hideAlert();
-                    }}
-                    onConfirmPressed={() => {
-                        this.hideAlert();
-                    }}
-                />
                 <Toast ref="toast" opacity={0.8}
                        position='top'
                        positionValue={300}
@@ -167,22 +143,6 @@ export default class ShuiBiaoDetail extends Component {
             }
         })
     }
-
-    showAlert = () => {
-        this.setState({
-            alertInfo:{
-                showAlert:true
-            }
-        });
-    };
-
-    hideAlert = () => {
-        this.setState({
-            alertInfo:{
-                showAlert:false
-            }
-        });
-    };
 }
 
 const styles=StyleSheet.create({
