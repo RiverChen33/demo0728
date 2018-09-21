@@ -58,7 +58,7 @@ export default class XunJianList extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-            <ScrollView style={{flex:1,backgroundColor:'#eaeaea',paddingBottom:20}}>
+            <View style={{flex:1,backgroundColor:'#eaeaea',paddingBottom:20}}>
                 <FlatList
                     data={this.state.list}
                     extraData={this.state}
@@ -83,7 +83,7 @@ export default class XunJianList extends Component {
                         </TouchableOpacity>
                             }
                 />
-            </ScrollView>
+            </View>
             <View style={{height:40,width:width,justifyContent:'center',flexDirection:"row"}}>
                 <TouchableOpacity onPress={()=>this.props.navigation.navigate("XuanJianDetail")} style={{flexDirection:'row',justifyContent:'center',flex:1}}>
                     <View style={{height:40,justifyContent:'center',backgroundColor:'#4083FF',flex:1,flexDirection:'row'}}>

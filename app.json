@@ -1,5 +1,6 @@
 {
   "name": "demo0728",
   "displayName": "demo0728",
-  "url":"http://school.quspacedragon.cn"
+  "url":"http://school.quspacedragon.cn",
+  "jumpSec":1000
 }
