@@ -77,15 +77,15 @@ export default class Home extends Component {
                             </CubicFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('KaoPinList')}>
-                            <CubicFunc source={require('../image/ic_home.png')} text="品质考评">
+                            <CubicFunc source={require('../image/kaopin1.png')} text="品质考评">
                             </CubicFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('JianChaList')}>
-                            <CubicFunc source={require('../image/ic_home.png')} text="品质检查">
+                            <CubicFunc source={require('../image/jiancha.png')} text="品质检查" style={{width:26}}>
                             </CubicFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('ZhengGai')}>
-                            <CubicFunc source={require('../image/ic_home.png')} text="品质整改">
+                            <CubicFunc source={require('../image/zhenggai.png')} text="品质整改">
                             </CubicFunc>
                         </TouchableOpacity>
                     </ScrollView>
@@ -130,18 +130,18 @@ export default class Home extends Component {
                     <Text style={styles.title}>招商租赁</Text>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('ResourceList')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="资源管理"></LRFunc>
+                            <LRFunc source={require('../image/ziyuan.png')} text="资源管理"></LRFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('CustomerList')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="客户管理"></LRFunc>
+                            <LRFunc source={require('../image/kehu.png')} text="客户管理" style={{height:35}}></LRFunc>
                         </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="合同管理"></LRFunc>
+                            <LRFunc source={require('../image/hetong.png')} text="合同管理"></LRFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="运营管理"></LRFunc>
+                            <LRFunc source={require('../image/yunying.png')} text="运营管理"></LRFunc>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -157,7 +157,7 @@ class CubicFunc extends  Component{
     render(){
         return (
             <View style={styles.cubic}>
-                <Image source={this.props.source}  style={{width:30,height:30,marginBottom:10,marginTop: 10}}></Image>
+                <Image source={this.props.source}  style={[{width:30,height:30,marginBottom:10,marginTop: 10},this.props.style]}></Image>
                 <Text>{this.props.text}</Text>
             </View>
         )
@@ -173,7 +173,7 @@ class LRFunc extends Component{
         return(
             <View style={styles.LRFunc}>
                 <Text style={{fontSize:16,textAlign:'center',paddingLeft:30}}>{this.props.text}</Text>
-                <Image source={this.props.source} style={{width:50,height:50,marginRight:10,marginBottom:10,marginTop: 10}}></Image>
+                <Image source={this.props.source} style={[{width:40,height:40,marginRight:10,marginBottom:10,marginTop: 10},this.props.style]}></Image>
             </View>
         )
     }
@@ -238,6 +238,6 @@ const styles=StyleSheet.create({
         borderStyle:'solid',
         borderColor:'#eee',
         marginRight:5,
-
+        backgroundColor:'#f7f9fb'
     }
 });
