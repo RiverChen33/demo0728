@@ -83,7 +83,10 @@ export default class Welcome extends Component {
         var that=this;
         Storage.get('apptoken').then(token=>{
             token=JSON.parse(token);
+<<<<<<< HEAD
             // alert(token);
+=======
+>>>>>>> b56bef0d879feff23acb5b0b2423183429a57ca3
 console.log(token);
             let isLogin=false;
 

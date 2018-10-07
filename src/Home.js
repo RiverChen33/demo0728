@@ -65,83 +65,83 @@ export default class Home extends Component {
                     <Text style={styles.title}>服务中心</Text>
                     <ScrollView style={{backgroundColor:'white'}} horizontal={true} showsHorizontalScrollIndicator={false}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('BaoShi')}>
-                            <CubicFunc text="报修" >
+                            <CubicFunc source={require('../image/baoshi.png')} text="报修" >
                             </CubicFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('QianFei')}>
-                            <CubicFunc text="欠费管理">
+                            <CubicFunc source={require('../image/qianfei.png')} text="欠费管理">
                             </CubicFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('ZhuHuList')}>
-                            <CubicFunc text="住户管理">
+                            <CubicFunc source={require('../image/zhuhu.png')} text="住户管理">
                             </CubicFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('KaoPinList')}>
-                            <CubicFunc text="品质考评">
+                            <CubicFunc source={require('../image/kaopin1.png')} text="品质考评">
                             </CubicFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('JianChaList')}>
-                            <CubicFunc text="品质检查">
+                            <CubicFunc source={require('../image/jiancha.png')} text="品质检查" style={{width:26}}>
                             </CubicFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('ZhengGai')}>
-                            <CubicFunc text="品质整改">
+                            <CubicFunc source={require('../image/zhenggai.png')} text="品质整改">
                             </CubicFunc>
                         </TouchableOpacity>
                     </ScrollView>
                 </View>
-                <View style={{marginLeft:10,marginBottom:15}}>
+                <View style={{marginLeft:10,marginBottom:15,marginRight:10}}>
                     <Text style={styles.title}>保安</Text>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('ChaYan')} style={{flex:1}}>
-                            <LRFunc2 source={require('../image/ic_home.png')} text="访客查验"></LRFunc2>
+                            <LRFunc2 source={require('../image/chayan.png')} text="访客查验"></LRFunc2>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('WeiTingList')} style={{flex:1}}>
-                            <LRFunc2 source={require('../image/ic_home.png')} text="车辆违停"></LRFunc2>
+                            <LRFunc2 source={require('../image/weiting.png')} style={{width:48,height:30}} text="车辆违停"></LRFunc2>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('ShiJianList')} style={{flex:1}}>
-                            <LRFunc2 source={require('../image/ic_home.png')} text="上报事件"></LRFunc2>
+                            <LRFunc2 source={require('../image/baoxiu.png')} text="上报事件"></LRFunc2>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{marginLeft:10,marginBottom:15}}>
+                <View style={{marginLeft:10,marginBottom:15,marginRight:10}}>
                     <Text style={styles.title}>工程人员</Text>
                     <View style={{flexDirection:'row',flex:1}}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('ShuiBiaoList')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="抄水表"></LRFunc>
+                            <LRFunc source={require('../image/shuibiao.png')} text="抄水表"></LRFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('DianBiaoList')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="抄电表"></LRFunc>
+                            <LRFunc source={require('../image/dianbiao.png')} text="抄电表"></LRFunc>
                         </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('XunJianList')} style={{flex:1}}>
-                            <LRFunc2 source={require('../image/ic_home.png')} text="设备巡检"></LRFunc2>
+                            <LRFunc2 source={require('../image/xunjian.png')} style={{width:32,height:40}} text="设备巡检"></LRFunc2>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('WeiXiuTab')} style={{flex:1}}>
-                            <LRFunc2 source={require('../image/ic_home.png')} text="设备维修"></LRFunc2>
+                            <LRFunc2 source={require('../image/weixiu.png')} text="设备维修"></LRFunc2>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
-                            <LRFunc2 source={require('../image/ic_home.png')} text="维修派工"></LRFunc2>
+                            <LRFunc2 source={require('../image/paigong.png')} text="维修派工"></LRFunc2>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{marginLeft:10,marginBottom:15}}>
+                <View style={{marginLeft:10,marginBottom:15,marginRight:10}}>
                     <Text style={styles.title}>招商租赁</Text>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('ResourceList')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="资源管理"></LRFunc>
+                            <LRFunc source={require('../image/ziyuan.png')} text="资源管理"></LRFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('CustomerList')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="客户管理"></LRFunc>
+                            <LRFunc source={require('../image/kehu.png')} text="客户管理" style={{height:35}}></LRFunc>
                         </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="合同管理"></LRFunc>
+                            <LRFunc source={require('../image/hetong.png')} text="合同管理"></LRFunc>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('Tab4')} style={{flex:1}}>
-                            <LRFunc source={require('../image/ic_home.png')} text="运营管理"></LRFunc>
+                            <LRFunc source={require('../image/yunying.png')} text="运营管理"></LRFunc>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -157,7 +157,7 @@ class CubicFunc extends  Component{
     render(){
         return (
             <View style={styles.cubic}>
-                <Image source={require('../image/ic_home.png')} style={{width:30,height:30}}></Image>
+                <Image source={this.props.source}  style={[{width:30,height:30,marginBottom:10,marginTop: 10},this.props.style]}></Image>
                 <Text>{this.props.text}</Text>
             </View>
         )
@@ -173,7 +173,7 @@ class LRFunc extends Component{
         return(
             <View style={styles.LRFunc}>
                 <Text style={{fontSize:16,textAlign:'center',paddingLeft:30}}>{this.props.text}</Text>
-                <Image source={this.props.source} style={{width:50,height:50,marginRight:10}}></Image>
+                <Image source={this.props.source} style={[{width:40,height:40,marginRight:10,marginBottom:10,marginTop: 10},this.props.style]}></Image>
             </View>
         )
     }
@@ -188,7 +188,7 @@ class LRFunc2 extends Component{
         return(
             <View style={styles.LRFunc2}>
                 <Text style={{fontSize:16,textAlign:'center'}}>{this.props.text}</Text>
-                <Image source={this.props.source} style={{width:40,height:40}}></Image>
+                <Image source={this.props.source} style={[{width:40,height:40,marginBottom:10,marginTop: 10},this.props.style]}></Image>
             </View>
         )
     }
@@ -238,6 +238,6 @@ const styles=StyleSheet.create({
         borderStyle:'solid',
         borderColor:'#eee',
         marginRight:5,
-
+        backgroundColor:'#f7f9fb'
     }
 });

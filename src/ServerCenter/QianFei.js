@@ -6,6 +6,11 @@ import {
     View,
     ScrollView,FlatList,Image,TouchableOpacity
 } from 'react-native';
+import FetchUtil from "../util/FetchUtil";
+import AppJson from "../../app";
+import {NavigationActions} from "react-navigation";
+import Toast from 'react-native-easy-toast';
+
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
 var {width} = dimensions.get('window');
@@ -40,16 +45,7 @@ export default class QianFei extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [{num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: true},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false},
-                {num: '201', class: '环境投诉', desc: '环境问题', location: 'A幢-201', status: '已分派', checkstatus: false}],
+            list: [],
             selectAll:false,
         }
     }
@@ -60,8 +56,9 @@ export default class QianFei extends Component {
 
         return (
             <View style={{flex:1}}>
-                <ScrollView style={{flex:1}}>
                     <FlatList
+                        onRefresh={() => this._onRefresh()}
+                        refreshing={this.state.isRefresh}
                         extraData={this.state}
                         data={list}
                         renderItem={({item,index}) =>
@@ -83,7 +80,6 @@ export default class QianFei extends Component {
                                 </View>
                             </View>}
                     />
-                </ScrollView>
                 <View style={{height:80,}}>
                     <View style={{width:width,justifyContent:'center',padding:10,alignItems:'flex-end'}}>
                         <TouchableOpacity onPress={()=>this.changeAllCheckStatus()}>
@@ -97,9 +93,48 @@ export default class QianFei extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <Toast ref="toast" opacity={0.8}
+                       position='top'
+                       positionValue={300}
+                       fadeInDuration={750}
+                       fadeOutDuration={2000}/>
             </View>
         )
     };
+
+    _onRefresh=()=>{
+        // 不处于 下拉刷新
+        if(!this.state.isRefresh){
+            this.setState({
+                isLoadMore:false,
+                pageNo:1
+            })
+            this._onRefresh1()
+        }
+    };
+
+    _onRefresh1() {
+        let that=this;
+
+        FetchUtil.postJSON(AppJson.url+"/app/service/v1/list",{},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.setState({
+                    list:responseJSON.data.records,
+                });
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
+            }
+        })
+    }
+
        changeCheckStatus=(index)=>{
            let list=this.state.list;
            list[index].checkstatus=!list[index].checkstatus;

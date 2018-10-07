@@ -13,6 +13,10 @@ import DatePicker from 'react-native-datepicker';
 import ImagePicker from 'react-native-image-picker';
 import px2dp from '../util';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import FetchUtil from "../util/FetchUtil";
+import AppJson from "../../app";
+import {NavigationActions} from "react-navigation";
+import Toast from 'react-native-easy-toast';
 
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
@@ -69,8 +73,10 @@ export default class BaoShi extends Component {
             tel:'',
             content:"",
             avatarSource: null,
-            time:1,
+            timeType:1,
+            time:"",
             datetime:"",
+            loacation:"",
             images:[],
             alertInfo:{
                 showAlert:false,
@@ -98,10 +104,23 @@ export default class BaoShi extends Component {
                             </RadioButton>
                         </RadioGroup>
                     </View>
-                    <View style={styles.line}>
-                        <Text style={styles.txt}>房间：</Text>
-                        <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({room:text})} style={{flex:1,fontSize:16,color:'#565656'}}/>
-                    </View>
+                    {this.state.area == "1" ?
+                        <View style={styles.line}>
+                            <Text style={styles.txt}>房间：</Text>
+                            <TextInput underlineColorAndroid='transparent'
+                                       onChangeText={(text) => this.setState({room: text})}
+                                       style={{flex: 1, fontSize: 16, color: '#565656'}}/>
+                        </View>
+                        :
+                        <View style={styles.line}>
+                            <Text style={styles.txt}>区域位置：</Text>
+                            <TextInput underlineColorAndroid='transparent'
+                                       onChangeText={(text) => this.setState({location: text})}
+                                       style={{flex: 1, fontSize: 16, color: '#565656'}}
+                                       placeholder={'请输入具体位置'}
+                            />
+                        </View>
+                    }
                     <View style={styles.line}>
                         <Text style={styles.txt}>报修人：</Text>
                         <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({name:text})} style={{flex:1,fontSize:16,color:'#565656'}}/>
@@ -111,7 +130,7 @@ export default class BaoShi extends Component {
                         <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({tel:text})} style={{flex:1,fontSize:16,color:'#565656'}}/>
                     </View>
                     <View style={styles.line1}>
-                        <Text style={styles.txt}>报修内容：</Text>
+                        <Text style={[styles.txt,{alignSelf:"flex-start",paddingTop:8}]}>报修内容：</Text>
                         <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656'}} multiline={true}/>
                     </View>
                 </View>
@@ -120,7 +139,7 @@ export default class BaoShi extends Component {
                 <View style={styles.line}>
                     <Text style={styles.txt}>期望时间：</Text>
                     <RadioGroup selectedIndex={0}
-                        onSelect = {(index, value) => {this.setState({time:value})}} style={{flexDirection:'row',flex:1,justifyContent:'center',alignSelf:'center'}}>
+                        onSelect = {(index, value) => {this.setState({timeType:value})}} style={{flexDirection:'row',flex:1,justifyContent:'center',alignSelf:'center'}}>
                         <RadioButton value={1} >
                             <Text>随时</Text>
                         </RadioButton>
@@ -130,7 +149,7 @@ export default class BaoShi extends Component {
                     </RadioGroup>
                 </View>
                 {
-                    this.state.time==1?(null):(
+                    this.state.timeType==1?(null):(
                         <View style={styles.line1}>
                             <Text style={styles.txt}>*期望时间：</Text>
                             <DatePicker
@@ -171,6 +190,7 @@ export default class BaoShi extends Component {
                                 horizontal={true}
                                 extraData={this.state}
                                 data={this.state.images}
+                                extradata={this.state.images}
                                 renderItem={({item}) =>
                                     <View style={{width:70,height:70,marginLeft:10,position:'relative'}}>
                                         <Image style={{width:70,height:70}} source={item} />
@@ -209,6 +229,12 @@ export default class BaoShi extends Component {
                     this.hideAlert();
                 }}
             />
+
+                <Toast ref="toast" opacity={0.8}
+                       position='top'
+                       positionValue={300}
+                       fadeInDuration={750}
+                       fadeOutDuration={2000}/>
             </View>
         )
     };
@@ -229,13 +255,19 @@ export default class BaoShi extends Component {
     };
 
 deleteImg=(index1)=>{
-    var list1=this.state.images.filter((e)=>e.index==index1);
-
+    let a="";
     var list=this.state.images;
-    list.pop(list1[0]);
+
+    var result=[];
+    for (let i=0;i<list.length;i++){
+        if(list[i].index!==index1){
+            result.push(list[i]);
+        }
+
+    }
 
     this.setState({
-        images:list
+        images:result
     })
 }
 
@@ -264,18 +296,46 @@ deleteImg=(index1)=>{
     }
 
     Submit(){
-        var that=this;
-        this.setState({
-            alertInfo:{
-                showAlert:true,
-                title:'温馨提示',
-                message:'提交成功'
+        let that=this;
+
+        // if(!!!this.state.num){
+        //     that.refs.toast.show("抄表读数不能为空");
+        //     return;
+        // }else{
+        //     if(+this.state.num<=0){
+        //         that.refs.toast.show("抄表读数应大于0");
+        //         return;
+        //     }
+        // }
+
+        FetchUtil.postJSON(AppJson.url+"/app/service/repairs/v1/save",
+            {
+                areaType:this.state.area,
+                roomId:this.state.room,
+                location:this.state.loacation,
+                content:this.state.content,
+                expectType:this.state.timeType,
+                expectTime:this.state.datetime,
+                imgs:this.state.images,
+                phone:this.state.tel,
+            },(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.refs.toast.show("提交成功");
+                setTimeout(()=>{
+                    that.props.navigation.goBack();
+                },AppJson.jumpSec);
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
             }
         })
-
-        setTimeout(()=>{
-            that.props.navigation.navigate("Home");
-        },2000);
     }
 }
 

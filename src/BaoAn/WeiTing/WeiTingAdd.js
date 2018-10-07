@@ -11,6 +11,10 @@ import {
 import ImagePicker from 'react-native-image-picker';
 import px2dp from '../../util';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import FetchUtil from "../../util/FetchUtil";
+import AppJson from "../../../app.json"
+import Toast from 'react-native-easy-toast';
+import { NavigationActions } from 'react-navigation';
 
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
@@ -62,13 +66,11 @@ export default class WeiTingAdd extends Component {
     constructor(props){
         super(props);
         this.state={
-            id:'',
-            content:"",
-            images:[],
-            timeflag:'1',
-            name:'',
-            date:'',
-            language:'',
+            carNo:"",
+            carOwner:"",
+            carPhone:"",
+            memo:'',
+            imgs:[],
             alertInfo:{
                 showAlert:false,
                 title:'温馨提示',
@@ -178,16 +180,22 @@ export default class WeiTingAdd extends Component {
         });
     };
 
-deleteImg=(index1)=>{
-    var list1=this.state.images.filter((e)=>e.index==index1);
+    deleteImg=(index1)=>{
+        let a="";
+        var list=this.state.images;
 
-    var list=this.state.images;
-    list.pop(list1[0]);
+        var result=[];
+        for (let i=0;i<list.length;i++){
+            if(list[i].index!==index1){
+                result.push(list[i]);
+            }
 
-    this.setState({
-        images:list
-    })
-}
+        }
+
+        this.setState({
+            images:result
+        })
+    }
 
     openMycamera = () =>{
         ImagePicker.showImagePicker(photoOptions,(response) =>{

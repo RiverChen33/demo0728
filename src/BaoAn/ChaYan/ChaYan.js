@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Toast from "react-native-easy-toast";
+import FetchUtil from "../../util/FetchUtil";
+import AppJson from "../../../App";
+import {NavigationActions} from "react-navigation";
 
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
@@ -158,9 +161,11 @@ export default class WeiXiuDengJi extends Component {
             //提交验证
 
             if(that.state.checkCode.length==4){
-                that.setState({
-                    displayPage:false
-                });
+                this.Submit();
+
+                // that.setState({
+                //     displayPage:false
+                // });
             }
         });
     }
@@ -182,18 +187,34 @@ export default class WeiXiuDengJi extends Component {
     };
 
     Submit(){
-        var that=this;
-        this.setState({
-            alertInfo:{
-                showAlert:true,
-                title:'温馨提示',
-                message:'提交成功'
-            }
-        })
+        let that=this;
 
-        setTimeout(()=>{
-            that.props.navigation.navigate("Home");
-        },2000);
+        FetchUtil.get(AppJson.url+"/app/service/repairs/v1/save",
+            {
+                code:this.state.checkCode
+            },(responseJSON)=>{
+                if(responseJSON.code==200){//成功
+                    that.setState({
+                        displayPage:false,
+                        visitor:{
+                            name:"",
+                            sex:"",
+                            hostname:"",
+                            dest:""
+                        }
+                    });
+                }else if(responseJSON.code==204001||responseJSON.code==204002){
+                    let resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                        ]
+                    });
+                    that.props.navigation.dispatch(resetAction);
+                }else{
+                    that.refs.toast.show(responseJSON.message);
+                }
+            })
     }
 }
 

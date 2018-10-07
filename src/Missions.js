@@ -204,6 +204,6 @@ const styles=StyleSheet.create({
         borderStyle:'solid',
         borderColor:'#eee',
         marginRight:5,
-
+        backgroundColor:'#f7f9fb'
     }
 });

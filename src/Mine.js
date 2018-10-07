@@ -42,40 +42,60 @@ class Mine extends Component {
                 <View style={{flexDirection:"row",paddingTop:10,paddingBottom:20,marginBottom:10,backgroundColor:'white'}}>
                     <View style={styles.item}>
                         <TouchableOpacity onPress={()=>{this.props.navigation.navigate("GDTab")}}>
-                            <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
+                            <Image source={require('../image/records.png')} style={[styles.imgicon3,{width:26}]}/>
                             <Text>工单记录</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.item}>
                         <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Atention")}}>
-                            <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
+                            <Image source={require('../image/pinjia.png')} style={styles.imgicon3}/>
                             <Text>评价</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.item}>
-                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Tab2")}}>
-                            <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Atention")}}>
+                            <Image source={require('../image/safe.png')} style={styles.imgicon3}/>
                             <Text>安全中心</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.item}>
                         <TouchableOpacity onPress={()=>{this.props.navigation.navigate("Atention")}}>
-                            <Image source={require('../image/ic_home.png')} style={styles.imgicon3}/>
+                            <Image source={require('../image/key.png')}  style={[styles.imgicon3,{height:26}]}/>
                             <Text>钥匙</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <FlatList
-                    data={[{key: '帮助与支持',page:''},{key: '常见问题'},{key: '新手指引'}]}
-                    renderItem={({item}) =>
+                <View>
+                    <TouchableOpacity>
                         <View style={{flexDirection:'row',backgroundColor:'white'}}>
-                            <Image source={require('../image/ic_home.png')} style={styles.imgicon2}/>
+                            <Image source={require('../image/help.png')} style={styles.imgicon2}/>
                             <View style={{lineHeight:40,flex:1,borderBottomStyle:'solid',borderBottomWidth:1,borderBottomColor:'#eee',justifyContent:'center',color:'black',position:'relative'}}>
-                                <Text>{item.key}</Text>
+                                <Text>帮助与支持</Text>
                                 <Image source={require('../image/arrow.png')} style={{position:'absolute',right:10,width:18,height:18}}/>
                             </View>
-                        </View>}
-                />
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <View style={{flexDirection:'row',backgroundColor:'white'}}>
+                            <Image source={require('../image/question.png')} style={styles.imgicon2}/>
+                            <View style={{lineHeight:40,flex:1,borderBottomStyle:'solid',borderBottomWidth:1,borderBottomColor:'#eee',justifyContent:'center',color:'black',position:'relative'}}>
+                                <Text>常见问题</Text>
+                                <Image source={require('../image/arrow.png')} style={{position:'absolute',right:10,width:18,height:18}}/>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <View style={{flexDirection:'row',backgroundColor:'white'}}>
+                            <Image source={require('../image/introduce.png')} style={styles.imgicon2}/>
+                            <View style={{lineHeight:40,flex:1,borderBottomStyle:'solid',borderBottomWidth:1,borderBottomColor:'#eee',justifyContent:'center',color:'black',position:'relative'}}>
+                                <Text>新手指引</Text>
+                                <Image source={require('../image/arrow.png')} style={{position:'absolute',right:10,width:18,height:18}}/>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+
+
                 <TouchableOpacity style={styles.btnStyle} onPress={()=>{this.props.navigation.navigate("Tab")}}>
                     <Text style={styles.loginText}>退出登录</Text>
                 </TouchableOpacity>
@@ -115,6 +135,7 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         textAlign:'center',
         justifyContent:'center',
+        marginBottom:5
     },
     imgicon2:{
         width:30,height:30,

@@ -201,16 +201,22 @@ export default class ShiJianAdd extends Component {
         });
     };
 
-deleteImg=(index1)=>{
-    var list1=this.state.images.filter((e)=>e.index==index1);
+    deleteImg=(index1)=>{
+        let a="";
+        var list=this.state.images;
 
-    var list=this.state.images;
-    list.pop(list1[0]);
+        var result=[];
+        for (let i=0;i<list.length;i++){
+            if(list[i].index!==index1){
+                result.push(list[i]);
+            }
 
-    this.setState({
-        images:list
-    })
-}
+        }
+
+        this.setState({
+            images:result
+        })
+    }
 
     openMycamera = () =>{
         ImagePicker.showImagePicker(photoOptions,(response) =>{

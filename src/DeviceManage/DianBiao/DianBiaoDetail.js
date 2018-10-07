@@ -129,7 +129,7 @@ export default class DianBiaoDetail extends Component {
                 that.refs.toast.show("提交成功");
                 setTimeout(()=>{
                     that.props.navigation.goBack();
-                },1500);
+                },AppJson.jumpSec);
             }else if(responseJSON.code==204001||responseJSON.code==204002){
                 let resetAction = NavigationActions.reset({
                     index: 0,
