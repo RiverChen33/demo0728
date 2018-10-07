@@ -47,6 +47,9 @@ export default class QianFei extends Component {
         this.state = {
             list: [],
             selectAll:false,
+            isRefresh:false,
+            pageNo:1,
+            isLoadMore:false
         }
     }
 

@@ -27,7 +27,7 @@ import Processing from "./src/service/Processing";
 import BeEvaluted from "./src/service/BeEvaluted";
 import Finish from "./src/service/Finish";
 import allGD from "./src/GDRecord/allGD";
-import BaoShi from "./src/ServerCenter/BaoShi";
+import BaoShi from "./src/ServerCenter/BaoShi/BaoShi";
 import QianFei from "./src/ServerCenter/QianFei";
 import ZhengGai from "./src/ServerCenter/ZhengGai/ZhengGai";
 import ZhengGaiDetail from "./src/ServerCenter/ZhengGai/ZhengGaiDetail";
@@ -79,6 +79,7 @@ import WanGongGD from "./src/GDRecord/WanGongGD";
 import Atention from "./src/Atention";
 import ShuiBiaoRoomList from "./src/DeviceManage/ShuiBiao/ShuiBiaoRoomList";
 import DianBiaoRoomList from "./src/DeviceManage/DianBiao/DianBiaoRoomList";
+import BaoShiSelectRoom from "./src/ServerCenter/BaoShi/BaoShiSelectRoom";
 
 
 const instructions = Platform.select({
@@ -498,6 +499,9 @@ export default Navi = StackNavigator({
     PaiGongSelectPeople: {
         screen: PaiGongSelectPeople,
     },
+    BaoShiSelectRoom: {
+        screen: BaoShiSelectRoom,
+    },
     PaiGongDetail: {
         screen: PaiGongDetail,
     },
@@ -606,7 +610,7 @@ export default Navi = StackNavigator({
         screen:GDTab
     }
 },{
-    initialRouteName:'Welcome',
+    initialRouteName:'Tab',
 });
 
 

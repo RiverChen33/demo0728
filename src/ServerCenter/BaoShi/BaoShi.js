@@ -11,10 +11,10 @@ import {
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import DatePicker from 'react-native-datepicker';
 import ImagePicker from 'react-native-image-picker';
-import px2dp from '../util';
+import px2dp from '../../util/index';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import FetchUtil from "../util/FetchUtil";
-import AppJson from "../../app";
+import FetchUtil from "../../util/FetchUtil";
+import AppJson from "../../../App";
 import {NavigationActions} from "react-navigation";
 import Toast from 'react-native-easy-toast';
 
@@ -57,7 +57,7 @@ export default class BaoShi extends Component {
                 <TouchableOpacity onPress={() => {
                     props.navigation.goBack()
                 }}>
-                    <Image style={{width:25,height:25,marginLeft:10}} source={require('../../image/back-icon.png')}/>
+                    <Image style={{width:25,height:25,marginLeft:10}} source={require('../../../image/back-icon.png')}/>
                 </TouchableOpacity>
             </View>
         }
@@ -70,6 +70,7 @@ export default class BaoShi extends Component {
             name:'',
             area:1,
             room:'',
+            roomId:'',
             tel:'',
             content:"",
             avatarSource: null,
@@ -107,9 +108,10 @@ export default class BaoShi extends Component {
                     {this.state.area == "1" ?
                         <View style={styles.line}>
                             <Text style={styles.txt}>房间：</Text>
-                            <TextInput underlineColorAndroid='transparent'
-                                       onChangeText={(text) => this.setState({room: text})}
-                                       style={{flex: 1, fontSize: 16, color: '#565656'}}/>
+                            <TouchableOpacity style={{flex:1,flexDirection:'row',justifyContent:'flex-end',alignItems:"center",marginRight:15}} onPress={this.selectPeople.bind(this)}>
+                                <Text>{this.state.room==''?'请选择':this.state.room}</Text>
+                                <Image style={{width:16,height:16,}} source={require('../../../image/arrow.png')}/>
+                            </TouchableOpacity>
                         </View>
                         :
                         <View style={styles.line}>
@@ -121,17 +123,21 @@ export default class BaoShi extends Component {
                             />
                         </View>
                     }
-                    <View style={styles.line}>
-                        <Text style={styles.txt}>报修人：</Text>
-                        <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({name:text})} style={{flex:1,fontSize:16,color:'#565656'}}/>
-                    </View>
+                    {/*<View style={styles.line}>*/}
+                        {/*<Text style={styles.txt}>报修人：</Text>*/}
+                        {/*<TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({name:text})} style={{flex:1,fontSize:16,color:'#565656'}}/>*/}
+                    {/*</View>*/}
                     <View style={styles.line}>
                         <Text style={styles.txt}>联系电话：</Text>
-                        <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({tel:text})} style={{flex:1,fontSize:16,color:'#565656'}}/>
+                        <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({tel:text})} style={{flex:1,fontSize:16,color:'#565656'}}
+                                   placeholder={'请输入'}
+                        />
                     </View>
                     <View style={styles.line1}>
-                        <Text style={[styles.txt,{alignSelf:"flex-start",paddingTop:8}]}>报修内容：</Text>
-                        <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656'}} multiline={true}/>
+                        <Text style={[styles.txt,{alignSelf:"flex-start",paddingTop:12}]}>报修内容：</Text>
+                        <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656',alignSelf:"flex-start"}} multiline={true}
+                                   placeholder={'请输入'}
+                        />
                     </View>
                 </View>
 
@@ -181,7 +187,7 @@ export default class BaoShi extends Component {
                     <View style={[{marginLeft: 10,flex:1,flexDirection:'row'}]}>
                         <TouchableOpacity onPress={()=>this.openMycamera()}>
                             <View style={{width:70,height:70,alignContent:'center',alignSelf:'center',justifyContent:'center',backgroundColor:'white',borderRadius:5,borderStyle:'solid',borderWidth:1,borderColor:'#c9c9c9'}}>
-                                <Image style={{width:40,height:40,alignSelf:'center',justifyContent:'center'}} source={require('../../image/add.png')}/>
+                                <Image style={{width:40,height:40,alignSelf:'center',justifyContent:'center'}} source={require('../../../image/add.png')}/>
                             </View>
                         </TouchableOpacity>
 
@@ -195,7 +201,7 @@ export default class BaoShi extends Component {
                                     <View style={{width:70,height:70,marginLeft:10,position:'relative'}}>
                                         <Image style={{width:70,height:70}} source={item} />
                                         <TouchableOpacity onPress={()=>this.deleteImg(item.index)} style={{position:'absolute',top:0,right:0}}>
-                                            <Image style={{width:20,height:20,}} source={require('../../image/delete.png')}/>
+                                            <Image style={{width:20,height:20,}} source={require('../../../image/delete.png')}/>
                                         </TouchableOpacity>
                                     </View>
                                 }
@@ -238,6 +244,14 @@ export default class BaoShi extends Component {
             </View>
         )
     };
+    selectPeople=()=>{
+        this.props.navigation.navigate('BaoShiSelectRoom', {returnData: this.returnData.bind(this)});
+    }
+
+    returnData(id, name) {
+        this.setState({roomId: id, room: name});
+    }
+
     showAlert = () => {
         this.setState({
             alertInfo:{
@@ -311,7 +325,7 @@ deleteImg=(index1)=>{
         FetchUtil.postJSON(AppJson.url+"/app/service/repairs/v1/save",
             {
                 areaType:this.state.area,
-                roomId:this.state.room,
+                roomId:this.state.roomId,
                 location:this.state.loacation,
                 content:this.state.content,
                 expectType:this.state.timeType,

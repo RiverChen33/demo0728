@@ -151,6 +151,12 @@ export default class WeiXiuDengJi extends Component {
                         </View>
                     </View>
                 }
+
+                <Toast ref="toast" opacity={0.8}
+                       position='top'
+                       positionValue={300}
+                       fadeInDuration={750}
+                       fadeOutDuration={2000}/>
             </View>
     )
     };
@@ -188,8 +194,7 @@ export default class WeiXiuDengJi extends Component {
 
     Submit(){
         let that=this;
-
-        FetchUtil.get(AppJson.url+"/app/service/repairs/v1/save",
+        FetchUtil.postJSON(AppJson.url+"/app/visitor/v1/valid",
             {
                 code:this.state.checkCode
             },(responseJSON)=>{

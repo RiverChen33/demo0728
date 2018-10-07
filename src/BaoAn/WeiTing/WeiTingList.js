@@ -9,10 +9,11 @@ import FetchUtil from "../../util/FetchUtil";
 import AppJson from "../../../app.json"
 import Toast from 'react-native-easy-toast';
 import { NavigationActions } from 'react-navigation';
+
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
 var {width} = dimensions.get('window');
-export default class XunJianList extends Component {
+export default class WeiTingList extends Component {
 
     static navigationOptions = (props)=> {
         return {
@@ -123,6 +124,39 @@ export default class XunJianList extends Component {
             </View>
         )
     };
+
+    _onRefresh=()=>{
+        // 不处于 下拉刷新
+        if(!this.state.isRefresh){
+            this.setState({
+                isLoadMore:false,
+                pageNo:1
+            })
+            this._onRefresh1()
+        }
+    };
+
+    _onRefresh1() {
+        let that=this;
+
+        FetchUtil.postJSON(AppJson.url+"/app/illegallyPark/v1/list",{},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.setState({
+                    list:responseJSON.data.records,
+                });
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
+            }
+        })
+    }
 }
 
 const styles=StyleSheet.create({

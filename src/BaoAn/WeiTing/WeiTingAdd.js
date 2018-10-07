@@ -112,10 +112,10 @@ export default class WeiTingAdd extends Component {
                             </View>
                         </TouchableOpacity>
 
-                        { this.state.images.length ==0 ? null :
+                        { this.state.imgs.length ==0 ? null :
                             <FlatList
                                 horizontal={true}
-                                data={this.state.images}
+                                data={this.state.imgs}
                                 extraData={this.state}
                                 renderItem={({item}) =>
                                     <View style={{width:70,height:70,marginLeft:10,position:'relative',flexDirection:'row'}}>
@@ -132,38 +132,15 @@ export default class WeiTingAdd extends Component {
                         <Text style={styles.loginText}>标记违停</Text>
                     </TouchableOpacity>
                 </ScrollView>
-                <AwesomeAlert
-                    show={this.state.alertInfo.showAlert}
-                    showProgress={false}
-                    title={this.state.alertInfo.title}
-                    message={this.state.alertInfo.message}
-                    closeOnTouchOutside={true}
-                    closeOnHardwareBackPress={false}
-                    showCancelButton={false}
-                    showConfirmButton={true}
-                    cancelText="取消"
-                    confirmText="确定"
-                    confirmButtonColor="#4083FF"
-                    onCancelPressed={() => {
-                        this.hideAlert();
-                    }}
-                    onConfirmPressed={() => {
-                        this.hideAlert();
-                    }}
-                />
+                <Toast ref="toast" opacity={0.8}
+                       position='top'
+                       positionValue={300}
+                       fadeInDuration={750}
+                       fadeOutDuration={2000}/>
             </View>
 
         )
     };
-    selectPeople=()=>{
-        this.props.navigation.navigate('SelectPeople', {returnData: this.returnData.bind(this)});
-    }
-
-    returnData(id, name) {
-        alert(name);
-        this.setState({id: id, name: name});
-    }
-
     showAlert = () => {
         this.setState({
             alertInfo:{
@@ -182,7 +159,7 @@ export default class WeiTingAdd extends Component {
 
     deleteImg=(index1)=>{
         let a="";
-        var list=this.state.images;
+        var list=this.state.imgs;
 
         var result=[];
         for (let i=0;i<list.length;i++){
@@ -193,7 +170,7 @@ export default class WeiTingAdd extends Component {
         }
 
         this.setState({
-            images:result
+            imgs:result
         })
     }
 
@@ -211,29 +188,55 @@ export default class WeiTingAdd extends Component {
             else {
                 let source = { uri: 'data:image/png;base64,'+response.data,index:index++ };
 
-                let list=this.state.images;
+                let list=this.state.imgs;
                 list.push(source);
                 this.setState({
-                    images: list
+                    imgs: list
                 });
             }
         })
     }
 
     Submit(){
-        var that=this;
-        this.setState({
-            alertInfo:{
-                showAlert:true,
-                title:'温馨提示',
-                message:'提交成功'
+        let that=this;
+
+        // if(!!!this.state.num){
+        //     that.refs.toast.show("抄表读数不能为空");
+        //     return;
+        // }else{
+        //     if(+this.state.num<=0){
+        //         that.refs.toast.show("抄表读数应大于0");
+        //         return;
+        //     }
+        // }
+
+        FetchUtil.postJSON(AppJson.url+"/app/illegallyPark/v1/save",
+            {
+                carNo :this.state.carNo,
+                carOwner :this.state.carOwner,
+                carPhone:this.state.carPhone,
+                imgs:this.state.imgs,
+                memo:this.state.memo ,
+            },(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.refs.toast.show("提交成功");
+                setTimeout(()=>{
+                    that.props.navigation.goBack();
+                },AppJson.jumpSec);
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
             }
         })
-
-        setTimeout(()=>{
-            that.props.navigation.navigate("Home");
-        },2000);
     }
+
 }
 
 const styles=StyleSheet.create({

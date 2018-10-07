@@ -43,7 +43,7 @@ export default class XunJianList extends Component {
 
     componentDidMount(){
         let that=this;
-        FetchUtil.postJSON(AppJson.url+"/app/room/building/v1/list",{},(responseJSON)=>{
+        FetchUtil.postJSON(AppJson.url+"/app/equip/v1/list",{},(responseJSON)=>{
             if(responseJSON.code==200){//成功
                 that.setState({
                     list:responseJSON.data.records
@@ -86,10 +86,8 @@ export default class XunJianList extends Component {
             <View style={{flex:1}}>
             <View style={{flex:1,backgroundColor:'#eaeaea',paddingBottom:20}}>
                 <FlatList
-                    ListEmptyComponent={this._createEmptyView}
                     data={this.state.list}
                     extraData={this.state}
-                    onEndReached={() => this._onLoadMore()}
                     onEndReachedThreshold={0.1}
                     onRefresh={() => this._onRefresh()}
                     refreshing={this.state.isRefresh}
@@ -159,7 +157,7 @@ export default class XunJianList extends Component {
     _onRefresh1() {
         let that=this;
 
-        FetchUtil.postJSON(AppJson.url+"/app/room/building/v1/list",{},(responseJSON)=>{
+        FetchUtil.postJSON(AppJson.url+"/app/equip/v1/list",{},(responseJSON)=>{
             if(responseJSON.code==200){//成功
                 that.setState({
                     list:responseJSON.data.records,
