@@ -80,6 +80,7 @@ import Atention from "./src/Atention";
 import ShuiBiaoRoomList from "./src/DeviceManage/ShuiBiao/ShuiBiaoRoomList";
 import DianBiaoRoomList from "./src/DeviceManage/DianBiao/DianBiaoRoomList";
 import BaoShiSelectRoom from "./src/ServerCenter/BaoShi/BaoShiSelectRoom";
+import WeiTingDeal from "./src/BaoAn/WeiTing/WeiTingDeal";
 
 
 const instructions = Platform.select({
@@ -571,6 +572,9 @@ export default Navi = StackNavigator({
     Atention: {
         screen: Atention,
     },
+    WeiTingDeal: {
+        screen: WeiTingDeal,
+    },
     ZhuHu: {
         screen: ZhuHu,
         navigationOptions: {
@@ -610,7 +614,7 @@ export default Navi = StackNavigator({
         screen:GDTab
     }
 },{
-    initialRouteName:'Tab',
+    initialRouteName:'LoginView',
 });
 
 

@@ -85,12 +85,12 @@ export default class WeiTingList extends Component {
                     data={this.state.list}
                     extraData={this.state}
                     renderItem={({item}) =>
-                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("",{id:item.id})}}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("WeiTingDeal",{id:item.id})}}>
                             <View style={styles.container}>
                                 <View style={{flex:4}}>
                                     <View style={{flexDirection:'row',height:30,justifyContent:'space-between'}}>
                                         <Text style={{fontSize:16,lineHeight:30,fontWeight:'600',color:'#4083FF'}}>违停车辆</Text>
-                                        <Text style={{fontSize:14,lineHeight:30}}>{item.createTime}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30}}>{FetchUtil.toDateString(item.createTime)}</Text>
                                     </View>
                                     <View style={{flexDirection:'row',height:30}}>
                                         <Text style={{fontSize:14,lineHeight:30}}>车牌号：{item.carNo}</Text>
@@ -110,7 +110,7 @@ export default class WeiTingList extends Component {
                             }
                 />
                 <View style={{height:40,width:width,justifyContent:'center',flexDirection:"row"}}>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("WeiTingAdd")} style={{flexDirection:'row',justifyContent:'center',flex:1}}>
+                    <TouchableOpacity onPress={this.add.bind(this)} style={{flexDirection:'row',justifyContent:'center',flex:1}}>
                         <View style={{height:40,justifyContent:'center',backgroundColor:'#4083FF',flex:1,flexDirection:'row'}}>
                             <Text style={{color:'white',alignSelf:'center'}}>添加违停</Text>
                         </View>
@@ -124,6 +124,13 @@ export default class WeiTingList extends Component {
             </View>
         )
     };
+    returnData(id) {
+        this._onRefresh1();
+    }
+
+    add=()=>{
+        this.props.navigation.navigate("WeiTingAdd",{returnData: this.returnData.bind(this)})
+    }
 
     _onRefresh=()=>{
         // 不处于 下拉刷新

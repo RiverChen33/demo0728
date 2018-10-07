@@ -72,8 +72,13 @@ export default class FetchUtil extends Component {
         }
 
         let token=Storage.get("apptoken").then((token)=> {
+            if (url.search(/\?/) === -1) {
+                url += '?token=' + JSON.parse(token);
+            } else {
+                url += '&token=' + JSON.parse(token);
+            }
             //fetch请求
-            fetch(url+"?token="+JSON.parse(token), {
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -107,25 +112,34 @@ export default class FetchUtil extends Component {
                 url += '&' + paramsArray.join('&')
             }
         }
-        let token=Storage.get("apptoken");
 
-        if (url.search(/\?/) === -1) {
-            url += '?token=' + token;
-        } else {
-            url += '&token=' + token;
-        }
+        let token=Storage.get("apptoken").then((token)=> {
+            if (url.search(/\?/) === -1) {
+                url += '?token=' + JSON.parse(token);
+            } else {
+                url += '&token=' + JSON.parse(token);
+            }
 
-        //fetch请求
-        fetch(url,{
-            method: 'GET',
+            //fetch请求
+            fetch(url,{
+                method: 'GET',
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    // alert("戴假发"+JSON.stringify(json));
+                    callback(json);
+                })
+                .catch((error) => {
+                    alert(error)
+                })
         })
-            .then((response) => response.json())
-            .then((json) => {
-                // alert("戴假发"+JSON.stringify(json));
-                callback(json);
-            })
-            .catch((error) => {
-                alert(error)
-            })
+
+
+    }
+
+    static toDateString(ticks){
+        let d=new Date(ticks);
+
+        return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDay()+1)+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
     }
 }

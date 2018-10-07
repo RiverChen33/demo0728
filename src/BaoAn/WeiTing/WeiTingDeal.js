@@ -35,11 +35,11 @@ var photoOptions = {
     }
 }
 var index=0;
-export default class WeiTingAdd extends Component {
+export default class WeiTingDeal extends Component {
 
     static navigationOptions = (props)=> {
         return {
-            headerTitle: '添加违停车辆',
+            headerTitle: '处理违停',
             gestureResponseDistance: {horizontal: 300},
             headerBackTitle: null,
             headerStyle: {backgroundColor: '#4083FF', height: 60},//导航栏的样式
@@ -129,7 +129,7 @@ export default class WeiTingAdd extends Component {
                         }
                     </View>
                     <TouchableOpacity style={styles.btnStyle} onPress={this.Submit.bind(this)}>
-                        <Text style={styles.loginText}>标记违停</Text>
+                        <Text style={styles.loginText}>标记处理</Text>
                     </TouchableOpacity>
                 </ScrollView>
                 <Toast ref="toast" opacity={0.8}
@@ -213,14 +213,17 @@ let data=            {
     carNo :this.state.carNo,
     carOwner :this.state.carOwner,
     carPhone:this.state.carPhone,
-    imgs:this.state.imgs.join("|"),
+    imgs:this.state.imgs,
     memo:this.state.memo ,
 };
-        FetchUtil.postJSON(AppJson.url+"/app/illegallyPark/v1/save", data,(responseJSON)=>{
+        FetchUtil.postJSON(AppJson.url+"/app/illegallyPark/v1/save",
+            {
+                illegallyPark:JSON.stringify(data)
+            },(responseJSON)=>{
             if(responseJSON.code==200){//成功
                 that.refs.toast.show("提交成功");
                 setTimeout(()=>{
-                    that.props.navigation.state.params.returnData("");
+                    that.props.navigation.state.params.refresh();
                     that.props.navigation.goBack();
                 },AppJson.jumpSec);
             }else if(responseJSON.code==204001||responseJSON.code==204002){

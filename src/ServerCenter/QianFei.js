@@ -52,8 +52,26 @@ export default class QianFei extends Component {
             isLoadMore:false
         }
     }
-
-
+    componentDidMount(){
+        let that=this;
+        FetchUtil.postJSON(AppJson.url+"/app/service/v1/list",{},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.setState({
+                    list:responseJSON.data.records
+                });
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
+            }
+        })
+    }
     render() {
         var list=this.state.list;
 
@@ -68,12 +86,12 @@ export default class QianFei extends Component {
                             <View style={styles.container}>
                                 <View style={{flex:5}}>
                                     <View style={{flexDirection:'row',height:30}}>
-                                        <Text style={{fontSize:16,lineHeight:30,width:60,}}>{item.num}</Text>
-                                        <Text style={{fontSize:14,lineHeight:30,width:80,}}>{item.class}</Text>
+                                        <Text style={{fontSize:16,lineHeight:30,width:60,}}>{item.roomNo}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30,width:80,}}>{item.reason}</Text>
                                     </View>
                                     <View style={{flexDirection:'row',height:30,alignContent:'center'}}>
                                         <Image source={require('../../image/moneybag.png')} style={{width:20,height:20,alignSelf:'center'}}></Image>
-                                        <Text style={{fontSize:14,lineHeight:30,width:180,}}>欠款金额：{item.location}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30,width:180,}}>欠款金额：{item.amount}</Text>
                                     </View>
                                 </View>
                                 <View style={{width:25,justifyContent:'center'}}>
@@ -90,7 +108,7 @@ export default class QianFei extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={{flex:1,width:width,justifyContent:'center',backgroundColor:'#4083FF'}}>
-                        <TouchableOpacity onPress={()=>this.changeAllCheckStatus()} style={{flexDirection:'row',justifyContent:'center'}}>
+                        <TouchableOpacity onPress={()=>this.Submit()} style={{flexDirection:'row',justifyContent:'center'}}>
                             <Image style={{width:20,height:20,alignSelf:'center'}} source={require('../../image/alarm.png')}/>
                             <Text style={{color:'white'}}>一键催缴</Text>
                         </TouchableOpacity>
@@ -156,8 +174,40 @@ export default class QianFei extends Component {
             list:list,
             selectAll:status
         });
-
     }
+    Submit=()=>{
+        let that=this;
+        let list=this.state.list;
+        let arr=[];
+        list.forEach((e)=>{
+            if(e.checkstatus){
+                arr.push(e.id);
+            }
+        });
+
+        if(arr.length<=0){
+            that.refs.toast.show("请先勾选要催缴的房间");
+            return;
+        }
+
+        FetchUtil.get(AppJson.url+"/app/service/v1/remind",{ids:arr},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.refs.toast.show("催缴成功");
+                that._onRefresh1();
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
+            }
+        })
+    }
+
 }
 
 
