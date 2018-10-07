@@ -606,7 +606,7 @@ export default Navi = StackNavigator({
         screen:GDTab
     }
 },{
-    initialRouteName:'LoginView',
+    initialRouteName:'Tab',
 });
 
 

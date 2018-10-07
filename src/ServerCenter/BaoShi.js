@@ -116,7 +116,9 @@ export default class BaoShi extends Component {
                             <Text style={styles.txt}>区域位置：</Text>
                             <TextInput underlineColorAndroid='transparent'
                                        onChangeText={(text) => this.setState({location: text})}
-                                       style={{flex: 1, fontSize: 16, color: '#565656'}}/>
+                                       style={{flex: 1, fontSize: 16, color: '#565656'}}
+                                       placeholder={'请输入具体位置'}
+                            />
                         </View>
                     }
                     <View style={styles.line}>
@@ -128,7 +130,7 @@ export default class BaoShi extends Component {
                         <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({tel:text})} style={{flex:1,fontSize:16,color:'#565656'}}/>
                     </View>
                     <View style={styles.line1}>
-                        <Text style={styles.txt}>报修内容：</Text>
+                        <Text style={[styles.txt,{alignSelf:"flex-start",paddingTop:8}]}>报修内容：</Text>
                         <TextInput underlineColorAndroid='transparent'onChangeText={(text)=>this.setState({content:text})} style={{flex:1,fontSize:16,color:'#565656'}} multiline={true}/>
                     </View>
                 </View>
@@ -147,7 +149,7 @@ export default class BaoShi extends Component {
                     </RadioGroup>
                 </View>
                 {
-                    this.state.time==1?(null):(
+                    this.state.timeType==1?(null):(
                         <View style={styles.line1}>
                             <Text style={styles.txt}>*期望时间：</Text>
                             <DatePicker
@@ -316,8 +318,6 @@ deleteImg=(index1)=>{
                 expectTime:this.state.datetime,
                 imgs:this.state.images,
                 phone:this.state.tel,
-
-
             },(responseJSON)=>{
             if(responseJSON.code==200){//成功
                 that.refs.toast.show("提交成功");

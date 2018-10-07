@@ -5,6 +5,10 @@ import {
     Text,
     View,ScrollView,FlatList,Image,StatusBar,TouchableOpacity
 } from 'react-native';
+import FetchUtil from "../../util/FetchUtil";
+import AppJson from "../../../app.json"
+import Toast from 'react-native-easy-toast';
+import { NavigationActions } from 'react-navigation';
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
 var {width} = dimensions.get('window');
@@ -39,29 +43,44 @@ export default class XunJianList extends Component {
 
 
     componentWillMount() {                    //通过setParams将increase方法绑定到_increase
+        let that=this;
+        FetchUtil.postJSON(AppJson.url+"/app/illegallyPark/v1/list",{},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.setState({
+                    list:responseJSON.data.records
+                });
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
+            }
+        })
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            list: [{id: '201', class: '楼内楼梯扶手、栏杆、窗台', date: '2018-01-05', status: '考评中'},
-                {id: '202', class: '楼内楼梯扶手、栏杆、窗台', desc: '环境问题', date: '2018-01-05', status: '整改中'},
-                {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
-                {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
-                {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
-                {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
-                {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
-                {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
-                {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
-                {id: '204', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '整改中'}]
+            list: [],//{id: '201', name: '楼内楼梯扶手、栏杆、窗台'}
+            key:'',
+            isRefresh:false,
+            pageNo:1,
+            isLoadMore:false
         }
     }
 
     render() {
         return (
             <View style={{flex:1}}>
-            <ScrollView style={{flex:1,backgroundColor:'#eaeaea',paddingBottom:20}}>
                 <FlatList
+                    style={{flex:1,backgroundColor:'#eaeaea',paddingBottom:20}}
+                    onRefresh={() => this._onRefresh()}
+                    refreshing={this.state.isRefresh}
                     data={this.state.list}
                     extraData={this.state}
                     renderItem={({item}) =>
@@ -69,17 +88,17 @@ export default class XunJianList extends Component {
                             <View style={styles.container}>
                                 <View style={{flex:4}}>
                                     <View style={{flexDirection:'row',height:30,justifyContent:'space-between'}}>
-                                        <Text style={{fontSize:16,lineHeight:30,fontWeight:'600',color:'#4083FF'}}>{item.class}</Text>
-                                        <Text style={{fontSize:14,lineHeight:30}}>{item.data}</Text>
+                                        <Text style={{fontSize:16,lineHeight:30,fontWeight:'600',color:'#4083FF'}}>违停车辆</Text>
+                                        <Text style={{fontSize:14,lineHeight:30}}>{item.createTime}</Text>
                                     </View>
                                     <View style={{flexDirection:'row',height:30}}>
-                                        <Text style={{fontSize:14,lineHeight:30}}>车牌号：{item.class}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30}}>车牌号：{item.carNo}</Text>
                                     </View>
                                     <View style={{flexDirection:'row',height:30}}>
-                                        <Text style={{fontSize:14,lineHeight:30}}>车主：{item.date}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30}}>车主：{item.carOwner}</Text>
                                     </View>
                                     <View style={{flexDirection:'row',height:30}}>
-                                        <Text style={{fontSize:14,lineHeight:30,color:'#929292'}}>电话：{item.date}</Text>
+                                        <Text style={{fontSize:14,lineHeight:30,color:'#929292'}}>电话：{item.carPhone}</Text>
                                     </View>
                                 </View>
                                 {/*<View style={{width:65,justifyContent:'center'}}>*/}
@@ -89,7 +108,6 @@ export default class XunJianList extends Component {
                         </TouchableOpacity>
                             }
                 />
-            </ScrollView>
                 <View style={{height:40,width:width,justifyContent:'center',flexDirection:"row"}}>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate("WeiTingAdd")} style={{flexDirection:'row',justifyContent:'center',flex:1}}>
                         <View style={{height:40,justifyContent:'center',backgroundColor:'#4083FF',flex:1,flexDirection:'row'}}>
@@ -97,6 +115,11 @@ export default class XunJianList extends Component {
                         </View>
                     </TouchableOpacity>
                 </View>
+                <Toast ref="toast" opacity={0.8}
+                       position='top'
+                       positionValue={300}
+                       fadeInDuration={750}
+                       fadeOutDuration={2000}/>
             </View>
         )
     };
