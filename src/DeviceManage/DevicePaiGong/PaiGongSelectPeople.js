@@ -56,7 +56,7 @@ export default class SelectPeople extends Component {
 
     render() {
         return (
-            <ScrollView style={{flex:1,position:'relative'}}>
+            <View style={{flex:1,position:'relative'}}>
                 <FlatList
                     extraData={this.state}
                     data={this.state.list}
@@ -75,7 +75,7 @@ export default class SelectPeople extends Component {
                     </TouchableOpacity>
                         }
                 />
-            </ScrollView>
+            </View>
         );
     };
 }

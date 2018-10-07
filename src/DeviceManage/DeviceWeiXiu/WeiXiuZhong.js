@@ -5,7 +5,12 @@ import {
     Text,
     View,ScrollView,FlatList,Image,StatusBar,TouchableOpacity
 } from 'react-native';
+import Toast from 'react-native-easy-toast';
+import { NavigationActions } from 'react-navigation';
+import FetchUtil from "../../util/FetchUtil";
+import AppJson from "../../../app.json"
 import AwesomeAlert from 'react-native-awesome-alerts';
+
 var dimensions = require('Dimensions');
 //获取屏幕的宽度
 var {width,height} = dimensions.get('window');
@@ -36,7 +41,25 @@ export default class WeiXiuZhong extends Component {
         }
 
     }
-    componentWillMount() {                    //通过setParams将increase方法绑定到_increase
+    componentDidMount(){
+        let that=this;
+        FetchUtil.postJSON(AppJson.url+"/app/room/building/v1/list",{},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.setState({
+                    list:responseJSON.data.records
+                });
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
+            }
+        })
     }
 
     constructor(props) {
@@ -52,6 +75,9 @@ export default class WeiXiuZhong extends Component {
                 {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
                 {id: '203', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '验收通过'},
                 {id: '204', class: '环境投诉', desc: '环境问题', date: '2018-01-05', status: '整改中'}],
+            isRefresh:false,
+            pageNo:1,
+            isLoadMore:false,
             alertInfo:{
                 showAlert:false,
                 title:'温馨提示',
@@ -63,10 +89,15 @@ export default class WeiXiuZhong extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-                <ScrollView style={{backgroundColor:'#eaeaea',paddingBottom:20}}>
+                <View style={{backgroundColor:'#eaeaea',paddingBottom:20}}>
                     <FlatList
+                        ListEmptyComponent={this._createEmptyView}
                         data={this.state.list}
                         extraData={this.state}
+                        onEndReached={() => this._onLoadMore()}
+                        onEndReachedThreshold={0.1}
+                        onRefresh={() => this._onRefresh()}
+                        refreshing={this.state.isRefresh}
                         renderItem={({item}) =>
                             <View>
                                 <View>
@@ -112,12 +143,17 @@ export default class WeiXiuZhong extends Component {
                         }
                     />
 
-                </ScrollView>
+                </View>
                 <View style={{height:40,width:width,justifyContent:'center',flexDirection:'row'}}>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate("WeiXiuDengJi")} style={{height:40,alignItems:'center',justifyContent:'center',flex:1,alignSelf:'center',backgroundColor:'#4083FF'}}>
                         <Text style={{color:'white',fontSize:14}}>登记</Text>
                     </TouchableOpacity>
                 </View>
+                <Toast ref="toast" opacity={0.8}
+                       position='top'
+                       positionValue={300}
+                       fadeInDuration={750}
+                       fadeOutDuration={2000}/>
                 <AwesomeAlert
                     show={this.state.alertInfo.showAlert}
                     showProgress={false}
@@ -157,6 +193,80 @@ export default class WeiXiuZhong extends Component {
     };
     clickConfirm=()=>{
 
+    }
+
+    /**
+     * 空布局
+     */
+    _createEmptyView(){
+        return (
+            <View style={{height:'100%', alignItems:'center', justifyContent:'center'}}>
+                <Text style={{fontSize:16}}>
+                    暂无列表数据，下拉刷新
+                </Text>
+            </View>
+        );
+    }
+
+    _onRefresh=()=>{
+        // 不处于 下拉刷新
+        if(!this.state.isRefresh){
+            this.setState({
+                isLoadMore:false,
+                pageNo:1
+            })
+            this._onRefresh1()
+        }
+    };
+
+    _onRefresh1() {
+        let that=this;
+
+        FetchUtil.postJSON(AppJson.url+"/app/room/building/v1/list",{},(responseJSON)=>{
+            if(responseJSON.code==200){//成功
+                that.setState({
+                    list:responseJSON.data.records,
+                });
+            }else if(responseJSON.code==204001||responseJSON.code==204002){
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName:'LoginView'})//要跳转到的页面名字
+                    ]
+                });
+                that.props.navigation.dispatch(resetAction);
+            }else{
+                that.refs.toast.show(responseJSON.message);
+            }
+        })
+    }
+
+    _onLoadMore() {
+        let key=this.state.key;
+        let that=this;
+
+        if (!this.state.isLoadMore && this.state.list.length > 0) {
+            FetchUtil.postForm(AppJson.url + "/app/room/building/v1/list", {
+                code: key,
+                pageNo: ++this.state.pageNo
+            }, (responseJSON) => {
+                if (responseJSON.code == 200) {//成功
+                    that.setState({
+                        list: this.state.list.concat(responseJSON.data.records),
+                    });
+                } else if (responseJSON.code == 204001 || responseJSON.code == 204002) {
+                    let resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({routeName: 'LoginView'})//要跳转到的页面名字
+                        ]
+                    });
+                    that.props.navigation.dispatch(resetAction);
+                } else {
+                    that.refs.toast.show(responseJSON.message);
+                }
+            })
+        }
     }
 }
 

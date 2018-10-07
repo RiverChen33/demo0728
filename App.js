@@ -606,7 +606,7 @@ export default Navi = StackNavigator({
         screen:GDTab
     }
 },{
-    initialRouteName:'Tab',
+    initialRouteName:'Welcome',
 });
 
 
@@ -615,6 +615,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+
+      
     backgroundColor: '#F5FCFF',
   },
   welcome: {
